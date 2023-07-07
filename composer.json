@@ -1,0 +1,8 @@
+{
+    "require": {
+        "fakerphp/faker": "^1.23"
+    },
+    "require-dev": {
+        "bluemmb/faker-picsum-photos-provider": "2.0"
+    }
+}
