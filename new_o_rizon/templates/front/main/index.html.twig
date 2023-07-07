@@ -1,20 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}New O'rizon Page d'accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- mobile version -->
+    <div id="home_map_mobile" class="container">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PROJETS/New-O-Rizon/new_o_rizon/src/Controller/Front/MainController.php'|file_link(0) }}">src/Controller/Front/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PROJETS/New-O-Rizon/new_o_rizon/templates/front/main/index.html.twig'|file_link(0) }}">templates/front/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <!-- Logo -->
+        <div class="logo">
+            <img class="logo-image" src="{{asset('images/logo_image.png')}}" alt="Logo du site New O'rizon représentant un globe terrestre transparent aux contours bleus">
+        </div>
+
+        <!-- Text of presentation -->
+        <div class="presentation-text">
+            <span class="welcome-text">
+                <p class="title">Bienvenue sur New O'rizon</p>
+                <p class="subtitle">Cliquez sur votre destination</p>
+                <p class="subtitle">Travaillez et voyagez</p>
+            </span>
+        </div>
+
+        <!-- Search bar -->
+        {# <div class="search-bar">
+            <div class="search-input">
+                <form action="{{ path('app_front_city_search')}}">
+                    <input class="search-field" type="text" name="search" placeholder="Recherche par ville"/>
+                    <button type="submit" id="search-button">
+                        <i class="fa fa-search" aria-hidden="false"></i>
+                    </button>
+                </form>
+            </div>
+        </div> #}
+
+        <!-- Carousel -->
+        {# {{ include('partials/_slide_buttons.html.twig') }} #}
+
+    </div>
+
+    <!-- desktop version -->
+    <div id="home_map_desktop" class="container">
+
+        <!-- World map -->
+        {# <div class="world-map">
+            {% include "partials/_map_homepage.html.twig" %}
+        </div> #}
+
+        <!-- Search bar -->
+        {# <div class="search-bar">
+            <div class="search-input">
+                <form action="{{ path('app_front_city_search')}}">
+                    <input class="search-field" type="text" name="search" placeholder="Recherche par ville"/>
+                    <button type="submit" id="search-button">
+                        <i class="fa fa-search" aria-hidden="false"></i>
+                    </button>
+                </form>
+            </div>
+        </div> #}
+
+        <!-- Text xl and + -->
+        <div class="text-xl-plus">
+            <span class="welcome-text">
+                <p class="title">Bienvenue sur</p>
+                <p class="title">New O'rizon</p>
+                <p class="subtitle">Cliquez sur votre destination</p>
+                <p class="subtitle">Travaillez et voyagez</p>
+            </span>
+        </div>
+
+    <!-- sidebar_filter -->
+    {# {{ include("partials/_filter_menu.html.twig") }} #}
+
 {% endblock %}

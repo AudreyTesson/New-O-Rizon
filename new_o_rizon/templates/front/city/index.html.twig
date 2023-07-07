@@ -3,18 +3,28 @@
 {% block title %}Hello CityController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% for city in cities %}
+    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <a href="{{ path('app_front_cities_detail', {'id': city.id}) }}">
+            <div class="w-full h-96 relative overflow-hidden">
+                <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
+                {# style="background-image:url('{{ city.imageUrl }}')"> #}
+                </div>
+                <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
+                    <h2 class="p-2 text-2xl font-bold w-fit">
+                        {{ city.name }}</h2>
+                    <h2 class="p-2 text-2xl font-bold w-fit">
+                        {# {{ city.countryName}}</h2> #}
+                    {# {% include "/partials/_favorites.html.twig" %} #}
+                </span>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PROJETS/New-O-Rizon/new_o_rizon/src/Controller/Front/CityController.php'|file_link(0) }}">src/Controller/Front/CityController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PROJETS/New-O-Rizon/new_o_rizon/templates/front/city/index.html.twig'|file_link(0) }}">templates/front/city/index.html.twig</a></code></li>
-    </ul>
-</div>
+                {# stars rating #}
+                <div class="absolute inset-x-0 bottom-4 flex justify-center drop-shadow-lg">
+                {# {% set ratingStars = city.cityRating|round %} #}
+                {# {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %} #}
+                </div>
+            </div>
+        </a>
+        {% endfor %}
 {% endblock %}

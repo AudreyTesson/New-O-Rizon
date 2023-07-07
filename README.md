@@ -29,3 +29,5 @@ symfony console make:fixtures
 `composer require fakerphp/faker`
 
 composer require --dev bluemmb/faker-picsum-photos-provider ^2.0
+
+symfony console d:f:l
