@@ -1,0 +1,77 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\City;
+use App\Entity\Country;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Bluemmb\Faker\PicsumPhotosProvider;
+use Faker\Factory;
+use Faker\Provider\fr_FR\Address;
+
+
+class AppFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+        $faker = Factory::create('fr_FR');
+        $faker->addProvider(new PicsumPhotosProvider($faker));
+        $faker->addProvider(new Address($faker));
+
+        $levels = ["","low", "medium", "high"];
+
+        // Create 50 countries
+        /** @var Country[] */
+        $countries = [];
+        for ($i=1; $i<51; $i++)
+        {
+            $country = new Country();
+
+            $country    ->setName($faker->country())
+                        ->setVisa($faker->word())
+                        ->setVisaIsRequired($faker->boolean())
+                        ->setCurrency($faker->currencyCode())
+                        // ->setImage($faker->imageUrl(640, 480, false))
+                        ->setCreatedAt($faker->dateTime());
+
+            $countries[] = $country;
+
+            $manager->persist($country);
+        }
+
+        // Create 200 cities 
+        /** @var City[] */   
+        $cities = [];      
+        for ($i=1; $i<201; $i++)
+        {
+            $city = new City();
+            // Random selection of one country
+            $randomCountry = $countries[mt_rand(0, count($countries)-1)];
+            // Random selection of one level
+            $randomLevel = $levels[mt_rand(0, count($levels)-1)];
+
+            $city   ->setName($faker->city())
+                    ->setArea($faker->numberBetween(1,300000))
+                    ->setCost($faker->randomNumber(6, false))
+                    ->setEnvironment($faker->word())
+                    ->setHousing($randomLevel)
+                    ->setLanguage($faker->word())
+                    ->setInternet($randomLevel)
+                    ->setDemography($faker->numberBetween(1, 40000000))
+                    ->setElectricity($randomLevel)
+                    ->setTimezone($faker->numberBetween(-12, 12))
+                    ->setTemperatureAverage($faker->numberBetween(-50, 50))
+                    ->setSunshineRate($randomLevel)
+                    ->setCreatedAt($faker->dateTime())
+                    ->setCountry($randomCountry);
+                    // ->setRating($faker->numberBetween(1,5));
+
+            $manager->persist($city);
+            $cities[] = $city;
+        }
+
+        $manager->flush();
+    }
+}
+

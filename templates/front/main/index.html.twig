@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New O'rizon Page d'accueil{% endblock %}
+
+{% block body %}
+
+    <!-- mobile version -->
+	<div id="home_map_mobile" class="w-full flex flex-col lg:hidden mb-5">
+
+        <!-- Logo -->
+		<div class="my-2 lg:hidden">
+			<img class="w-1/3 animate-rotate-y animate-infinite animate-duration-[9000ms] animate-ease-in" src="{{asset('images/logo_image.png')}}" alt="Logo du site New O'rizon représentant un globe terrestre transparent aux contours bleus">
+		</div>
+
+        <!-- Text of presentation -->
+		<div class="mb-2 pb-4 px-6 lg:hidden">
+			<span class="italic font-medium text-cyan-900 text-center ">
+				<p class="text-2xl font-bold">Bienvenue sur New O'rizon</p>
+				<p class="text-base">Cliquez sur votre destination</p>
+				<p class="text-base">Travaillez et voyagez</p>
+			</span>
+		</div>
+
+    </div>
+
+    <!-- desktop version -->
+	<div id="home_map_desktop" class="hidden mt-4 lg:block">
+
+        {# text xl and + #}
+        <div class="hidden xl:block absolute left-8 2xl:bottom-60 xl:bottom-48 bottom-72 backdrop-brightness-10 ">
+            <span class="text-gray-700 italic font-bold">
+                <p class="text-4xl ">Bienvenue sur</p>
+                <p class="text-4xl ">New O'rizon</p>
+                <p class="text-2xl">Cliquez sur votre destination</p>
+                <p class="text-2xl">Travaillez et voyagez</p>
+            </span>
+        </div>
+
+        {# text lg and - #}
+        <div class="absolute sm:hidden lg:block xl:hidden inset-x-1/2 w-1/2 top-15 backdrop-brightness-10">
+            <span class="text-gray-700 italic font-bold">
+                <p class="text-4xl">Bienvenue</p> 
+                <p class="absolute text-4xl left-24">sur New O'rizon</p>
+            </span>
+        </div>
+        <div class="absolute sm:hidden lg:block xl:hidden inset-x-1/3 w-1/2 bottom-32 backdrop-brightness-10">
+            <span class="text-gray-700 italic font-bold bottom-12">
+                <p class="text-4xl">Cliquez sur votre destination</p> 
+                <p class="absolute text-2xl left-60">Travaillez et voyagez</p>
+            </span>
+        </div>
+        
+    </div>
+
+{% endblock %}

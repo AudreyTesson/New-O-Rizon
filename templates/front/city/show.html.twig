@@ -1,0 +1,281 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New O'rizon Page de ville{% endblock %}
+
+{% block body %}
+<div class="w-full grid gap-0">
+    <div class="relative w-full h-96" style="background-image:url('{{ asset('images/city2.jpg') }}')">
+        <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
+            <h2 class="text-2xl mt-4 font-bold w-fit">
+                {{ city.name }}</h2>
+            <h2 class="text-2xl mb-2 font-bold w-fit">
+                {{ city.country.name}}</h2>
+        </span>
+    </div>
+
+    <div class="w-full grid lg:grid-cols-5 lg:justify-center lg:items-center lg:px-6 lg:py-9 gap-4">
+
+        <div class="w-full lg:col-span-2 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 divide-y divide-gray-200 dark:divide-gray-700">
+            <div class="flex justify-center mb-4">
+                <h5 class="text-xl font-bold leading-none text-cyan-900 dark:text-white">Critères</h5>
+            </div>
+
+            <div class="flex flex-wrap text-sm md:text-lg divide-y divide-gray-200 dark:divide-gray-700 ">
+                
+                <div class="flex items-center w-1/2 py-3 space-x-4">
+                    <div>
+                        <i class="fa-solid fa-bolt fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div>
+                        <p class="text-cyan-900 dark:text-white font-bold">
+                            Electricité
+                        </p>
+                        <p class="text-cyan-900">
+                            {{ city.electricity }}
+                        </p>
+                    </div>
+                </div>    
+    
+                <div class="flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-solid fa-wifi fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Internet
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.internet }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex items-center w-1/2 py-3 space-x-4">
+                    <div class="">
+                        <i class="fa-regular fa-sun fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div>
+                        <p class="text-cyan-900 dark:text-white font-bold">
+                            Taux d'ensoleillement
+                        </p>
+                        <p class="text-cyan-900">
+                            {{ city.sunshineRate }}
+                        </p>
+                    </div>
+                </div>
+        
+                <div class="flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4 md:space-x-4 ">
+                        <div>
+                            <i class="fa-solid fa-temperature-half fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Température moyenne
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.temperatureAverage }} °C
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="flex items-center w-1/2 py-3 space-x-4">
+                    <div>
+                        <i class="fa-solid fa-sack-dollar fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div>
+                        <p class="text-cyan-900 dark:text-white font-bold">
+                            Coût de la vie
+                        </p>
+                        <p class="text-cyan-900">
+                            {{ city.cost }} Euros
+                        </p>
+                    </div>
+                </div>
+        
+                <div class="flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-solid fa-people-group fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Démographie
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.demography }} habitants
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        
+                {# small device : revealed with button criteria below #}
+                <div class="criteria-expanded hidden md:flex items-center w-1/2 py-3 space-x-4">
+                    <div>
+                        <i class="fa-solid fa-house fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div>
+                        <p class="text-cyan-900 dark:text-white font-bold">
+                            Habitation
+                        </p>
+                        <p class="text-cyan-900">
+                            {{ city.housing }}
+                        </p>
+                    </div>
+                </div>
+    
+                {# small device : revealed with button criteria below #}
+                <div class="criteria-expanded hidden md:flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-regular fa-clock fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Timezone
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.timezone }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {# small device : revealed with button criteria below #}
+                <div class="criteria-expanded hidden md:flex items-center w-1/2 py-3 space-x-4">
+                    <div>
+                        <i class="fa-solid fa-language fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div>
+                        <p class="text-cyan-900 dark:text-white font-bold">
+                            Langue
+                        </p>
+                        <p class="text-cyan-900">
+                            {{ city.language }}
+                        </p>
+                    </div>
+                </div>
+
+                {# small device : revealed with button criteria below #}
+                <div class="criteria-expanded hidden md:flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-solid fa-passport fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Visa
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.country.visa }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {# small device : revealed with button criteria below #}
+                <div class="criteria-expanded hidden md:flex items-center w-1/2 py-3 space-x-4">
+                    <div>
+                        <i class="fa-solid fa-person-military-pointing fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div>
+                        <p class="text-cyan-900 dark:text-white font-bold">
+                            Visa requis
+                        </p>
+                        <p class="text-cyan-900">
+                            {{ city.country.visaIsRequired }}
+                        </p>
+                    </div>
+                </div>
+
+                {# small device : revealed with button criteria below #}
+                <div class="criteria-expanded hidden md:flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-brands fa-bitcoin fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Monnaie
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.country.currency }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {# revealed with button criteria below #}
+                <div class="criteria-expanded hidden flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-regular fa-image fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Environnement
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.environment }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {# revealed with button criteria below #}
+                <div class="criteria-expanded hidden flex items-center w-1/2 py-3 space-x-4">        
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <i class="fa-solid fa-ruler fa-xl" style="color: #000000;"></i>
+                        </div>
+                        <div>
+                            <p class="text-cyan-900 dark:text-white font-bold">
+                                Superficie
+                            </p>
+                            <p class="text-cyan-900">
+                                {{ city.area }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="criteria" class="mt-5 w-fit">
+                <button id="toggle-criteria" type="button" class="w-full hover:bg-sky-600 hover:text-white text-base leading-4 font-bold py-4 px-10 text-cyan-900 bg-white border-gray-900 border-2 rounded-lg">Plus de critères</button>
+            </div>
+
+        </div>
+
+        {# container #}
+        <div class="md:col-span-3 lg:w-full lg:h-full mx-2 flex flex-row py-2">
+
+            {# google maps integration #}
+            <div id="my-map" class="h-full w-5/6">
+                <iframe
+                class="w-full h-full"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.77824581142!2d2.2646349778821486!3d48.85893843456867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1688736729435!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            {# api weather integration #}
+            <div class="weather">
+                {# text hidden mobile version #}
+                <h2 class="weather-title">Météo actuelle :</h2>
+                <ion-icon name="rainy-outline" size="large"></ion-icon>
+                {# text hidden mobile version #}
+                <h2 class="weather-temperature">Température :</h2>
+                <h2 class="weather-value">
+                    {{ city.temperatureAverage }} °C
+                </h2>
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>  
+
+{% endblock %}
