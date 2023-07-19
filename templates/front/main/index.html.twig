@@ -5,70 +5,51 @@
 {% block body %}
 
     <!-- mobile version -->
-    <div id="home_map_mobile" class="container">
+	<div id="home_map_mobile" class="w-full flex flex-col lg:hidden mb-5">
 
         <!-- Logo -->
-        <div class="logo">
-            <img class="logo-image" src="{{asset('images/logo_image.png')}}" alt="Logo du site New O'rizon représentant un globe terrestre transparent aux contours bleus">
-        </div>
+		<div class="my-2 lg:hidden">
+			<img class="w-1/3 animate-rotate-y animate-infinite animate-duration-[9000ms] animate-ease-in" src="{{asset('images/logo_image.png')}}" alt="Logo du site New O'rizon représentant un globe terrestre transparent aux contours bleus">
+		</div>
 
         <!-- Text of presentation -->
-        <div class="presentation-text">
-            <span class="welcome-text">
-                <p class="title">Bienvenue sur New O'rizon</p>
-                <p class="subtitle">Cliquez sur votre destination</p>
-                <p class="subtitle">Travaillez et voyagez</p>
-            </span>
-        </div>
-
-        <!-- Search bar -->
-        {# <div class="search-bar">
-            <div class="search-input">
-                <form action="{{ path('app_front_city_search')}}">
-                    <input class="search-field" type="text" name="search" placeholder="Recherche par ville"/>
-                    <button type="submit" id="search-button">
-                        <i class="fa fa-search" aria-hidden="false"></i>
-                    </button>
-                </form>
-            </div>
-        </div> #}
-
-        <!-- Carousel -->
-        {# {{ include('partials/_slide_buttons.html.twig') }} #}
+		<div class="mb-2 pb-4 px-6 lg:hidden">
+			<span class="italic font-medium text-cyan-900 text-center ">
+				<p class="text-2xl font-bold">Bienvenue sur New O'rizon</p>
+				<p class="text-base">Cliquez sur votre destination</p>
+				<p class="text-base">Travaillez et voyagez</p>
+			</span>
+		</div>
 
     </div>
 
     <!-- desktop version -->
-    <div id="home_map_desktop" class="container">
+	<div id="home_map_desktop" class="hidden mt-4 lg:block">
 
-        <!-- World map -->
-        {# <div class="world-map">
-            {% include "partials/_map_homepage.html.twig" %}
-        </div> #}
-
-        <!-- Search bar -->
-        {# <div class="search-bar">
-            <div class="search-input">
-                <form action="{{ path('app_front_city_search')}}">
-                    <input class="search-field" type="text" name="search" placeholder="Recherche par ville"/>
-                    <button type="submit" id="search-button">
-                        <i class="fa fa-search" aria-hidden="false"></i>
-                    </button>
-                </form>
-            </div>
-        </div> #}
-
-        <!-- Text xl and + -->
-        <div class="text-xl-plus">
-            <span class="welcome-text">
-                <p class="title">Bienvenue sur</p>
-                <p class="title">New O'rizon</p>
-                <p class="subtitle">Cliquez sur votre destination</p>
-                <p class="subtitle">Travaillez et voyagez</p>
+        {# text xl and + #}
+        <div class="hidden xl:block absolute left-8 2xl:bottom-60 xl:bottom-48 bottom-72 backdrop-brightness-10 ">
+            <span class="text-gray-700 italic font-bold">
+                <p class="text-4xl ">Bienvenue sur</p>
+                <p class="text-4xl ">New O'rizon</p>
+                <p class="text-2xl">Cliquez sur votre destination</p>
+                <p class="text-2xl">Travaillez et voyagez</p>
             </span>
         </div>
 
-    <!-- sidebar_filter -->
-    {# {{ include("partials/_filter_menu.html.twig") }} #}
+        {# text lg and - #}
+        <div class="absolute sm:hidden lg:block xl:hidden inset-x-1/2 w-1/2 top-15 backdrop-brightness-10">
+            <span class="text-gray-700 italic font-bold">
+                <p class="text-4xl">Bienvenue</p> 
+                <p class="absolute text-4xl left-24">sur New O'rizon</p>
+            </span>
+        </div>
+        <div class="absolute sm:hidden lg:block xl:hidden inset-x-1/3 w-1/2 bottom-32 backdrop-brightness-10">
+            <span class="text-gray-700 italic font-bold bottom-12">
+                <p class="text-4xl">Cliquez sur votre destination</p> 
+                <p class="absolute text-2xl left-60">Travaillez et voyagez</p>
+            </span>
+        </div>
+        
+    </div>
 
 {% endblock %}
