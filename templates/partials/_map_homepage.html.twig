@@ -1,0 +1,20 @@
+<body style="margin: 0;background-color: rgba(80,80,80,0);">
+	<div id="map" class="w-full">
+	</div>
+</body>
+
+<!-- amCharts javascript sources -->
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/ammap.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+
+<script type="text/javascript">
+
+	function redirectToCity(cityId) {
+		var url = "{{ path('app_front_cities_detail', {'id': 0}) }}";
+		url = url.replace('0', cityId);
+		return url;
+	}
+
+</script>
+
+<script type="text/javascript" src="js/map_homepage.js"></script>

@@ -26,6 +26,11 @@
     <!-- desktop version -->
 	<div id="home_map_desktop" class="hidden mt-4 lg:block">
 
+        {# world map #}
+        <div class="relative h-screen w-full grid">
+
+            {% include "partials/_map_homepage.html.twig" %}
+
         {# text xl and + #}
         <div class="hidden xl:block absolute left-8 2xl:bottom-60 xl:bottom-48 bottom-72 backdrop-brightness-10 ">
             <span class="text-gray-700 italic font-bold">
