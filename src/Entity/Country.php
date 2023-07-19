@@ -37,6 +37,9 @@ class Country
     #[ORM\OneToMany(mappedBy: 'country', targetEntity: City::class)]
     private Collection $cities;
 
+    #[ORM\OneToOne(mappedBy: 'country', cascade: ['persist', 'remove'])]
+    private ?Image $image = null;
+
     public function __construct()
     {
         $this->cities = new ArrayCollection();
@@ -145,6 +148,28 @@ class Country
                 $city->setCountry(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($image === null && $this->image !== null) {
+            $this->image->setCountry(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($image !== null && $image->getCountry() !== $this) {
+            $image->setCountry($this);
+        }
+
+        $this->image = $image;
 
         return $this;
     }
