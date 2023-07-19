@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous ?{% endblock %}
+
+{% block body %}
+
+<!-- component -->
+<h1 class="flex justify-center my-4 text-2xl lg:text-3xl font-bold text-cyan-900"> Qui sommes-nous ?</h1>
+
+{# About us page mobile version #}
+<div class="container w-full lg:hidden flex flex-col gap-2 mx-auto">
+<!-- component -->
+
+    <div
+        class="relative w-fill flex flex-row rounded-lg shadow-lg px-1 border border-white bg-white">
+        <div class="w-1/2 flex flex-col bg-white place-items-center ml-1 mt-8">
+            <img src="https://i.pravatar.cc/300?img=1" alt="Photo de Christelle Hidoine" class="rounded-xl my-2 mx-1" />
+            <a href="https://www.linkedin.com/in/christelle-hidoine/" class="text-blue-500 hover:text-blue-700 text-xs">LinkedIn</a>
+            <a href="https://github.com/Christelle-Hidoine" class="text-blue-500 hover:text-blue-700 text-xs">GitHub</a>
+        </div>
+        <div class="w-full md:w-2/3 bg-white flex flex-col space-y-1 p-2">    
+            <h3 class="font-black text-center text-gray-800 md:text-3xl text-xl">Christelle Hidoine</h3>
+            <p class="text-xs text-center text-gray-600">Développeuse web</p>
+            <p class="text-sm text-gray-500 ">
+            Christelle, la reine du code HTML,
+            Son clavier est son cheval de bataille.
+            Elle transforme les sites avec magie,
+            En créant des interfaces à l'infini.</p>
+        </div>
+    </div>
+
+    <div class="relative w-fill flex flex-row rounded-lg shadow-lg px-1 border border-white bg-white">
+        <div class="w-1/2 flex flex-col bg-white place-items-center ml-1 mt-8">
+            <img src="https://i.pravatar.cc/300?img=2" alt="Photo d'Audrey Tesson" class="rounded-xl my-2 mx-1" />
+            <a href="https://www.linkedin.com/in/audrey-tesson-dev/" class="text-blue-500 hover:text-blue-700 text-xs">LinkedIn</a>
+            <a href="https://github.com/AudreyTesson" class="text-blue-500 hover:text-blue-700 text-xs">GitHub</a>
+        </div>
+        <div class="w-full md:w-2/3 bg-white flex flex-col space-y-1 p-2"> 
+            <h3 class="font-black text-center text-gray-800 md:text-3xl text-xl">Audrey Tesson</h3>
+            <p class="text-xs text-center text-gray-600">Développeuse web</p>
+            <p class="text-sm text-gray-500 ">
+            Audrey, la geek au style chic,
+            Manie le CSS avec une esthétique unique.
+            Elle jongle avec les balises en cascade,
+            Pour des sites web qui nous laissent béats.</p>
+        </div>
+    </div>
+
+        <div class="relative w-fill flex flex-row rounded-lg shadow-lg px-1 border border-white bg-white">
+            <div class="w-1/2 flex flex-col bg-white place-items-center ml-1 mt-8">
+                <img src="https://i.pravatar.cc/300?img=3" alt="Photo de Thomas Bernier" class="rounded-xl my-2 mx-1" />
+                <a href="https://www.linkedin.com/in/thomas-bernier-7053b216b/" class="text-blue-500 hover:text-blue-700 text-xs">LinkedIn</a>
+                <a href="https://github.com/thomas-bnr" class="text-blue-500 hover:text-blue-700 text-xs">GitHub</a>
+            </div>
+            <div class="w-full md:w-2/3 bg-white flex flex-col space-y-1 p-2">                   
+                <h3 class="font-black text-center text-gray-800 md:text-3xl text-xl">Thomas Bernier</h3>
+                <p class="text-xs text-center text-gray-600">Développeur web</p>
+                <p class="text-sm text-gray-500 ">
+                Thomas, le virtuose du JavaScript,
+                Dans son navigateur, il fait des acrobaties.
+                Il résout les bugs en un claquement de doigts,
+                Et transforme les erreurs en exploits.</p>
+            </div>
+        </div>
+
+        <div class="relative w-fill mb-4 flex flex-row rounded-lg shadow-lg px-1 border border-white bg-white">
+            <div class="w-1/2 flex flex-col bg-white place-items-center ml-1 mt-8">
+                <img src="https://i.pravatar.cc/300?img=4" alt="Photo de Xavier Gaüzère" class="rounded-xl my-2 mx-1" />
+                <a href="https://www.linkedin.com/in/xavier-gauzere/" class="text-blue-500 hover:text-blue-700 text-xs">LinkedIn</a>
+                <a href="https://github.com/XavierGauzere" class="text-blue-500 hover:text-blue-700 text-xs">GitHub</a>
+            </div>
+            <div class="w-full md:w-2/3 bg-white flex flex-col space-y-1 p-2">
+                <h3 class="font-black text-center text-gray-800 md:text-3xl text-xl">Xavier Gaüzère</h3>
+                <p class="text-xs text-center text-gray-600">Développeur web</p>
+                <p class="text-sm text-gray-500 ">
+                Xavier, le codeur intrépide,
+                Dans son écran, il trouve sa symphonie.
+                Il maîtrise Symfony avec une aisance rare,
+                Pour des sites web qui nous font tous jubiler.</p>
+            </div>
+        </div>
+    </div>
+
+    {# About us page desktop version #}
+    <div class="container w-full hidden lg:flex wrap gap-16 mx-auto bg-gray-100">
+
+        <!-- component -->
+        <div class="bg-gray-100">
+            <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-md p-5">
+                <img class="w-32 h-32 rounded-full mx-auto" src="https://i.pravatar.cc/300?img=1" alt="Photo de Christelle Hidoine">
+                <h2 class="text-center text-2xl font-semibold mt-3">Christelle Hidoine</h2>
+                <p class="text-center text-gray-600 mt-1">Développeuse web</p>
+                <div class="flex justify-center mt-5">  
+                    <a href="https://www.linkedin.com/in/christelle-hidoine/" class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
+                    <a href="https://github.com/Christelle-Hidoine" class="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
+                </div>
+                <div class="mt-5">
+                    {# <h3 class="text-xl font-semibold">Bio</h3> #}
+                    <p class="text-gray-600 mt-2">
+                        Christelle, la reine du code HTML,
+                        Son clavier est son cheval de bataille.
+                        Elle transforme les sites avec magie,
+                        En créant des interfaces à l'infini.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-100">
+            <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-md p-5">
+                <img class="w-32 h-32 rounded-full mx-auto" src="https://i.pravatar.cc/300?img=2" alt="Photo d'Audrey Tesson">
+                <h2 class="text-center text-2xl font-semibold mt-3">Audrey Tesson</h2>
+                <p class="text-center text-gray-600 mt-1">Développeuse web</p>
+                <div class="flex justify-center mt-5">  
+                    <a href="https://www.linkedin.com/in/audrey-tesson-dev/" class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
+                    <a href="https://github.com/AudreyTesson" class="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
+                </div>
+                <div class="mt-5">
+                    {# <h3 class="text-xl font-semibold">Bio</h3> #}
+                    <p class="text-gray-600 mt-2">
+                        Audrey, la geek au style chic,
+                        Manie le CSS avec une esthétique unique.
+                        Elle jongle avec les balises en cascade,
+                        Pour des sites web qui nous laissent béats.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-100 ">
+            <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-md p-5">
+                <img class="w-32 h-32 rounded-full mx-auto" src="https://i.pravatar.cc/300?img=3" alt="Photo de Thomas Bernier">
+                <h2 class="text-center text-2xl font-semibold mt-3">Thomas Bernier</h2>
+                <p class="text-center text-gray-600 mt-1">Développeur web</p>
+                <div class="flex justify-center mt-5">  
+                    <a href="https://www.linkedin.com/in/thomas-bernier-7053b216b/" class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
+                    <a href="https://github.com/thomas-bnr" class="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
+                </div>
+                <div class="mt-5">
+                    {# <h3 class="text-xl font-semibold">Bio</h3> #}
+                    <p class="text-gray-600 mt-2">
+                        Thomas, le virtuose du JavaScript,
+                        Dans son navigateur, il fait des acrobaties.
+                        Il résout les bugs en un claquement de doigts,
+                        Et transforme les erreurs en exploits.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-100">
+            <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-md p-5">
+                <img class="w-32 h-32 rounded-full mx-auto" src="https://i.pravatar.cc/300?img=4" alt="Photo de Xavier Gaüzère">
+                <h2 class="text-center text-2xl font-semibold mt-3">Xavier Gaüzère</h2>
+                <p class="text-center text-gray-600 mt-1">Développeur web</p>
+                <div class="flex justify-center mt-5">  
+                    <a href="https://www.linkedin.com/in/xavier-gauzere/" class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
+                    <a href="https://github.com/XavierGauzere" class="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
+                </div>
+                <div class="mt-5">
+                    {# <h3 class="text-xl font-semibold">Bio</h3> #}
+                    <p class="text-gray-600 mt-2">
+                        Xavier, le codeur intrépide,
+                        Dans son écran, il trouve sa symphonie.
+                        Il maîtrise Symfony avec une aisance rare,
+                        Pour des sites web qui nous font tous jubiler.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

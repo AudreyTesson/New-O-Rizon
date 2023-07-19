@@ -22,4 +22,14 @@ class MainController extends AbstractController
             'cities' => $cities,
         ]);
     }
+
+    #[Route('/about-us', name: 'app_front_about_us')]
+    function aboutUs() {
+        return $this->render('front/footer/about_us.html.twig');
+    }
+
+    #[Route('/legal-notices', name: 'app_front_about_us')]
+    function legalNotices() {
+        return $this->render('front/footer/legal_notices.html.twig');        
+    }
 }
