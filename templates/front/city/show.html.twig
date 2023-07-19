@@ -3,122 +3,122 @@
 {% block title %}New O'rizon Page de ville{% endblock %}
 
 {% block body %}
-<div class= "c1">
-    <div class="c2" style="background-image:url('{{ asset('images/city2.jpg') }}')">
-        <span class="c3">
-            <h2 class="c4">
+<div class="my-container">
+    <div class="city-image" style="background-image:url('{{ asset('images/city2.jpg') }}')">
+        <span class="city-info">
+            <h2 class="city-name">
                 {{ city.name }}</h2>
-            <h2 class="c5">
+            <h2 class="country-name">
                 {{ city.country.name}}</h2>
             {# {% include "/partials/_favorites.html.twig" %} #}
         </span>
 
         {# stars rating #}
-        <div class="c6"> 
-            <div class="c7">
+        {# <div class="stars-rating">
+            <div class="stars-container"> #}
 
             {# <div>
                 {% set ratingStars = city.rating|round(0, 'floor') %}
                 {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %}
             </div> #}
 
-            </div>
-        </div>
+            {# </div>
+        </div> #}
     </div>
 
-    <div class="c8">
+    <div class="grid-container">
 
-        <div class="c9">
-            <div class="c10">
-                <h5 class="c11">Critères</h5>
+        <div class="section-1">
+            <div class="title">
+                <h5 class="critere-title">Critères</h5>
             </div>
 
-            <div class="c12 ">
+            <div class="content">
                 
-                <div class="c13">
+                <div class="item">
                     <div>
                         <i class="fa-solid fa-bolt fa-xl" style="color: #000000;"></i>
                     </div>
                     <div>
-                        <p class="c14">
+                        <p class="critere-label">
                             Electricité
                         </p>
-                        <p class="text-cyan-900">
+                        <p class="critere-value">
                             {{ city.electricity }}
                         </p>
                     </div>
                 </div>    
     
-                <div class="c13">        
-                    <div class="c15">
+                <div class="item">     
+                    <div class="right-col">
                         <div>
                             <i class="fa-solid fa-wifi fa-xl" style="color: #000000;"></i>
                         </div>
                         <div>
-                            <p class="c14">
+                            <p class="critere-label">
                                 Internet
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.internet }}
                             </p>
                         </div>
                     </div>
                 </div>
         
-                <div class="c13">
+                <div class="item">
                     <div class="">
                         <i class="fa-regular fa-sun fa-xl" style="color: #000000;"></i>
                     </div>
                     <div>
-                        <p class="c14">
+                        <p class="critere-label">
                             Taux d'ensoleillement
                         </p>
-                        <p class="text-cyan-900">
+                        <p class="critere-value">
                             {{ city.sunshineRate }}
                         </p>
                     </div>
                 </div>
         
-                <div class="c13">        
-                    <div class="c15 md:space-x-4 ">
+                <div class="item">        
+                    <div class="right-col">
                         <div>
                             <i class="fa-solid fa-temperature-half fa-xl" style="color: #000000;"></i>
                         </div>
                         <div>
-                            <p class="c14">
+                            <p class="critere-label">
                                 Température moyenne
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.temperatureAverage }} °C
                             </p>
                         </div>
                     </div>
                 </div>
             
-                <div class="c13">
+                <div class="item">
                     <div>
                         <i class="fa-solid fa-sack-dollar fa-xl" style="color: #000000;"></i>
                     </div>
                     <div>
-                        <p class="c14">
+                        <p class="critere-label">
                             Coût de la vie
                         </p>
-                        <p class="text-cyan-900">
+                        <p class="critere-value">
                             {{ city.cost }} Euros
                         </p>
                     </div>
                 </div>
         
-                <div class="c13">        
-                    <div class="c15">
+                <div class="item">        
+                    <div class="right-col">
                         <div>
                             <i class="fa-solid fa-people-group fa-xl" style="color: #000000;"></i>
                         </div>
                         <div>
-                            <p class="c14">
+                            <p class="critere-label">
                                 Démographie
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.demography }} habitants
                             </p>
                         </div>
@@ -134,7 +134,7 @@
                         <p class="c17">
                             Habitation
                         </p>
-                        <p class="text-cyan-900">
+                        <p class="critere-value">
                             {{ city.housing }}
                         </p>
                     </div>
@@ -142,7 +142,7 @@
     
                 {# small device : revealed with button criteria below #}
                 <div class="c16">        
-                    <div class="flex items-center space-x-4">
+                    <div class="right-col">
                         <div>
                             <i class="fa-regular fa-clock fa-xl" style="color: #000000;"></i>
                         </div>
@@ -150,7 +150,7 @@
                             <p class="c17">
                                 Timezone
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.timezone }}
                             </p>
                         </div>
@@ -166,7 +166,7 @@
                         <p class="c17">
                             Langue
                         </p>
-                        <p class="text-cyan-900">
+                        <p class="critere-value">
                             {{ city.language }}
                         </p>
                     </div>
@@ -182,7 +182,7 @@
                             <p class="c17">
                                 Visa
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.country.visa }}
                             </p>
                         </div>
@@ -198,7 +198,7 @@
                         <p class="c17">
                             Visa requis
                         </p>
-                        <p class="text-cyan-900">
+                        <p class="critere-value">
                             {{ city.country.visaIsRequired }}
                         </p>
                     </div>
@@ -206,7 +206,7 @@
 
                 {# small device : revealed with button criteria below #}
                 <div class="c16">        
-                    <div class="c15">
+                    <div class="right-col">
                         <div>
                             <i class="fa-brands fa-bitcoin fa-xl" style="color: #000000;"></i>
                         </div>
@@ -214,7 +214,7 @@
                             <p class="c17">
                                 Monnaie
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.country.currency }}
                             </p>
                         </div>
@@ -223,7 +223,7 @@
 
                 {# revealed with button criteria below #}
                 <div class="criteria-expanded hidden flex items-center w-1/2 py-3 space-x-4">        
-                    <div class="c15">
+                    <div class="right-col">
                         <div>
                             <i class="fa-regular fa-image fa-xl" style="color: #000000;"></i>
                         </div>
@@ -231,7 +231,7 @@
                             <p class="c17">
                                 Environnement
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.environment }}
                             </p>
                         </div>
@@ -240,7 +240,7 @@
 
                 {# revealed with button criteria below #}
                 <div class="criteria-expanded hidden flex items-center w-1/2 py-3 space-x-4">        
-                    <div class="c15">
+                    <div class="right-col">
                         <div>
                             <i class="fa-solid fa-ruler fa-xl" style="color: #000000;"></i>
                         </div>
@@ -248,7 +248,7 @@
                             <p class="c17">
                                 Superficie
                             </p>
-                            <p class="text-cyan-900">
+                            <p class="critere-value">
                                 {{ city.area }}
                             </p>
                         </div>
@@ -263,22 +263,22 @@
         </div>
 
         {# container #}
-        <div class="city-container">
+        <div class="section-2">
 
             {# google maps integration #}
-            <div id="my-map" class="map">
+            <div class="map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.77824581142!2d2.2646349778821486!3d48.85893843456867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1688736729435!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
 
             {# api weather integration #}
-            <div class = "w-1/6 ml-2">
+            <div class="weather">
                 {# text hidden mobile version #}
-                <h2 class="hidden md:block pb-1 text-md w-fit">Météo actuelle :</h2>
+                <h2 class="weather-title">Météo actuelle :</h2>
                 <ion-icon name="rainy-outline" size="large"></ion-icon>
                 {# text hidden mobile version #}
-                <h2 class="hidden md:block text-md w-fit">Température :</h2>
-                <h2 class="p-1 text-md w-fit">
+                <h2 class="weather-temperature">Température :</h2>
+                <h2 class="weather-value">
                     {{ city.temperatureAverage }} °C
                 </h2>
             </div>
@@ -296,35 +296,37 @@
 
         <div class="flex justify-center mx-auto my-4 w-fit">
             <a href="{{ path('app_front_review_add', {'id':city.id})}}">
-                <button class="w-full hover:bg-sky-600 hover:text-white text-base leading-4 font-bold py-4 px-10 text-cyan-900 bg-white border-gray-900 border-2 rounded-lg">Ajouter un commentaire</button>
+                <button class="review-button" type="button">Ajouter un commentaire</button>
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 justify-center mx-auto">
+        <div class="reviews-grid">
 
             {% for review in allReviewFromBDD %}
 
-                <div class="block my-2 mx-2 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <div class="space-y-1 font-medium dark:text-white">
-                        <p>{{ review.username }}</p>
-                        <span class="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Commenté le {{ review.createdAt|date('d-m-Y') }}</p>
+                <div class="review-card">
+                    <div class="review-header">
+                        <p class="review-username">{{ review.username }}</p>
+                        <span class="review-date">
+                            <p>Commenté le {{ review.createdAt|date('d-m-Y') }}</p>
+                        </span>
                     </div>
 
-                    <div class="flex items-center mb-1">
+                    <div class="review-rating">
 
                         {% include '/partials/_stars.html.twig' with {'ratingStars': review.rating} %}
 
                     </div>
 
-                    <p class="mb-2 text-gray-500 dark:text-gray-400">{{ review.content}}</p>
+                    <p class="review-content">{{ review.content}}</p>
 
                 </div>
 
             {% else %}
 
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                    <p><span class="ps-1">Cette ville n'a pas encore de commentaires<p></span>
+                <div class="review-card">
+                    <div class="review-body">
+                        <p><span class="ps-1">Cette ville n'a pas encore de commentaires<p></span>
                     </div>
                 </div>
 
