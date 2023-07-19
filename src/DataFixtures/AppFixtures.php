@@ -4,12 +4,12 @@ namespace App\DataFixtures;
 
 use App\Entity\City;
 use App\Entity\Country;
+use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Bluemmb\Faker\PicsumPhotosProvider;
 use Faker\Factory;
 use Faker\Provider\fr_FR\Address;
-
 
 class AppFixtures extends Fixture
 {
@@ -69,6 +69,33 @@ class AppFixtures extends Fixture
 
             $manager->persist($city);
             $cities[] = $city;
+        }
+
+        // Create 2 at 8 images per city 
+        /** @var Image[] */
+        $images = [];
+        // Association between city and image
+        foreach ($cities as $city) 
+        {
+            $randomNbImage = mt_rand(2,8);
+            for ($i=0; $i < $randomNbImage; $i++)
+            {   
+                /** @var Image */
+                $image = new Image();
+                $image->setUrl($faker->imageUrl(640, 480, false));
+                $image->setCity($city);
+
+                $manager->persist($image);
+
+                $images[] = $image;
+            }
+        }
+
+        // Association between country and image
+        foreach ($countries as $country)
+        {
+            $randomImage = $faker->numberBetween(0, count($images) -1);
+            $country->setImage($images[$randomImage]);
         }
 
         $manager->flush();

@@ -39,6 +39,36 @@ class CityRepository extends ServiceEntityRepository
         }
     }
 
+    public function findCountryAndImageByCity($order = null)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $dql = "
+        SELECT c.id AS id, i.id AS imageId, i.url AS imageUrl, c.name AS name, c.area AS cityArea, c.createdAt AS cityCreatedAt, c.updatedAt AS cityUpdatedAt, c.electricity AS cityElectricity, c.internet AS cityInternet, c.sunshineRate AS citySunshineRate, c.temperatureAverage AS cityTemperatureAverage, c.cost AS cityCost, c.language AS cityLanguage, c.demography AS cityDemography, c.housing AS cityHousing, c.timezone AS cityTimezone, c.environment AS cityEnvironment, co.name AS countryName, co.id AS countryId
+        FROM App\Entity\City c
+        JOIN App\Entity\Image i WITH i.city = c
+        JOIN App\Entity\Country co WITH c.country = co
+        WHERE (
+            SELECT COUNT(img.id) 
+            FROM App\Entity\Image img 
+            WHERE img.city = c.id 
+            AND img.id <= i.id) 
+            = 1
+        GROUP BY co.id
+        ";
+
+        if ($order !== null) {
+            $dql .= " ORDER BY c.name " . ($order === 'ASC' ? 'ASC' : 'DESC');
+        }
+
+        $query = $entityManager->createQuery($dql);
+        $sortedCities = $query->getResult();
+
+        $sortedCities = $query->getResult();
+
+        return $sortedCities;
+    }
+
 //    /**
 //     * @return City[] Returns an array of City objects
 //     */
