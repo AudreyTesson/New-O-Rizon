@@ -21,10 +21,14 @@
                             </span>
                         </div>
                     </a>
-                        </div>
-                {% endfor %}
                 </div>
-
+            {% endfor %}
         </div>
 
+    </div>
+
+        <div class="pagination flex justify-center mb-5">
+    {{ knp_pagination_render(cities) }}
+    {# {{ knp_pagination_sortable(cities, 'Title A-Z', 'a.title', {}, {'direction': 'asc'}) }} #}
+</div>
 {% endblock %}
