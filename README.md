@@ -36,6 +36,8 @@ composer require --dev bluemmb/faker-picsum-photos-provider ^2.0
 
 symfony console d:f:l
 
+composer require symfony/security-bundle
+
 ## TailwindCSS :
 
 ### Check doc : 
