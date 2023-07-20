@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\City;
 use App\Entity\Country;
 use App\Entity\Image;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Bluemmb\Faker\PicsumPhotosProvider;
@@ -97,6 +98,31 @@ class AppFixtures extends Fixture
             $randomImage = $faker->numberBetween(0, count($images) -1);
             $country->setImage($images[$randomImage]);
         }
+
+        // Create 2 users 
+        // Create admin
+        $admin = new User();
+
+        $admin  ->setEmail('admin@admin.com')
+                ->setPassword('$2y$13$x.pNoMbX5ikG8Vga/M/XueIl1WcQQmIeIwpasn5NL0/TrM8jURoPC')
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setUsername($faker->userName())
+                ->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($admin);
+
+        // Create user
+        $user = new User();
+
+        $user   ->setEmail('user@user.com')
+                ->setPassword('$2y$13$OkSYE0ebZfiTVHths5Gga.UzSYklXRXF7N1bX95zHPNQpAA/bfjYW')
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setUsername($faker->userName())
+                ->setRoles(['ROLE_USER']);
+
+        $manager->persist($user);
 
         $manager->flush();
     }
