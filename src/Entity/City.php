@@ -64,6 +64,9 @@ class City
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class)]
     private Collection $images;
 
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -280,6 +283,23 @@ class City
                 $image->setCity(null);
             }
         }
+
+        return $this;
+    }
+    
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }

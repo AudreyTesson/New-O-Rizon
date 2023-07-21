@@ -62,4 +62,9 @@ class Image
 
         return $this;
     }
+
+    function __toString(): string
+    {
+        return $this->getId();
+    }
 }

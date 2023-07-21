@@ -38,6 +38,16 @@ symfony console d:f:l
 
 composer require symfony/security-bundle
 
+### EasyAdmin
+
+composer require easycorp/easyadmin-bundle
+
+php bin/console assets:install
+
+### API
+
+bin/console make:command
+
 ## TailwindCSS :
 
 ### Check doc : 
