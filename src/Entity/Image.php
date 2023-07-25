@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
@@ -21,6 +22,15 @@ class Image
 
     #[ORM\OneToOne(inversedBy: 'image', cascade: ['persist', 'remove'])]
     private ?Country $country = null;
+
+    // public function __construct() {
+    //     $this->city = new ArrayCollection();
+    // }
+
+    function __toString(): string
+    {
+        return $this->getUrl();
+    }
 
     public function getId(): ?int
     {
@@ -63,8 +73,4 @@ class Image
         return $this;
     }
 
-    function __toString(): string
-    {
-        return $this->getId();
-    }
 }

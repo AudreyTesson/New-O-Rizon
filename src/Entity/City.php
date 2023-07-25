@@ -28,14 +28,11 @@ class City
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $electricity = null;
+    #[ORM\Column(nullable: true)]
+    private array $electricity = [];
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $internet = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $sunshineRate = null;
+    #[ORM\Column(nullable: true)]
+    private array $sunshineRate = [];
 
     #[ORM\Column(nullable: true)]
     private ?float $temperatureAverage = null;
@@ -49,8 +46,8 @@ class City
     #[ORM\Column(nullable: true)]
     private ?int $demography = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $housing = null;
+    #[ORM\Column(nullable: true)]
+    private array $housing = [];
 
     #[ORM\Column]
     private ?int $timezone = null;
@@ -64,12 +61,20 @@ class City
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class)]
     private Collection $images;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+
+    #[ORM\Column(nullable: true)]
+    private array $internet = [];
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
+    }
+    
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -125,36 +130,24 @@ class City
         return $this;
     }
 
-    public function getElectricity(): ?string
+    public function getElectricity(): array
     {
         return $this->electricity;
     }
 
-    public function setElectricity(?string $electricity): static
+    public function setElectricity(?array $electricity): static
     {
         $this->electricity = $electricity;
 
         return $this;
     }
 
-    public function getInternet(): ?string
-    {
-        return $this->internet;
-    }
-
-    public function setInternet(?string $internet): static
-    {
-        $this->internet = $internet;
-
-        return $this;
-    }
-
-    public function getSunshineRate(): ?string
+    public function getSunshineRate(): array
     {
         return $this->sunshineRate;
     }
 
-    public function setSunshineRate(?string $sunshineRate): static
+    public function setSunshineRate(?array $sunshineRate): static
     {
         $this->sunshineRate = $sunshineRate;
 
@@ -209,12 +202,12 @@ class City
         return $this;
     }
 
-    public function getHousing(): ?string
+    public function getHousing(): array
     {
         return $this->housing;
     }
 
-    public function setHousing(?string $housing): static
+    public function setHousing(?array $housing): static
     {
         $this->housing = $housing;
 
@@ -257,6 +250,31 @@ class City
         return $this;
     }
 
+    
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getInternet(): array
+    {
+        return $this->internet;
+    }
+
+    public function setInternet(?array $internet): static
+    {
+        $this->internet = $internet;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Image>
      */
@@ -283,23 +301,6 @@ class City
                 $image->setCity(null);
             }
         }
-
-        return $this;
-    }
-    
-    public function __toString(): string
-    {
-        return $this->name;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): static
-    {
-        $this->picture = $picture;
 
         return $this;
     }

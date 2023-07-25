@@ -27,20 +27,6 @@ class CityCrudController extends AbstractCrudController
 {
     use Trait\ShowTrait;
 
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-    // private $CityRepository;
-    // private $request;
-
-    // public function __construct(CityRepository $cityRepository, Request $request) {
-    //     $this->CityRepository = $cityRepository;
-    //     $this->request = $request;
-    // }
-
     public static function getEntityFqcn(): string
     {
         return City::class ;
@@ -48,106 +34,102 @@ class CityCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $cityRepository = $this->entityManager->getRepository(City::class);
-        $cities = $cityRepository->findAll();
-        
         yield IdField::new('id')->hideOnForm();
-        yield TextField::new('name', 'Nom');
 
+        yield TextField::new('name', 'Nom');
             // TextEditorField::new('description'),
         yield ImageField::new('picture')
-            ->setBasePath('/uploads/images/')
-            ->setUploadDir('public/uploads/images/');
-
-        // yield CollectionField::new('images')
-        //     ->setLabel('Images')
-        //     ->setTemplatePath('admin/field/images.html.twig')
-        //     ->setCustomOption('cities', $cities);
-        
-        // yield AssociationField::new('images')->setQueryBuilder(function (QueryBuilder $queryBuilder) {
-        //     // dd($queryBuilder->getDQL());
-        //     return $queryBuilder
-        //         ->select('i.id', 'i.url')
-        //         ->from(Image::class, 'c')
-        //         ->leftJoin('c.city', 'i')
-        //         ->where('i.id = :city')
-    // });
-
-                    // ->setParameter('city', $this->request->query->get('entityId'))
-
-                    // SELECT c.id AS id, i.id AS imageId, i.url AS imageUrl, c.name AS name, c.area AS cityArea, c.createdAt AS cityCreatedAt, c.updatedAt AS cityUpdatedAt, c.electricity AS cityElectricity, c.internet AS cityInternet, c.sunshineRate AS citySunshineRate, c.temperatureAverage AS cityTemperatureAverage, c.cost AS cityCost, c.language AS cityLanguage, c.demography AS cityDemography, c.housing AS cityHousing, c.timezone AS cityTimezone, c.environment AS cityEnvironment, co.name AS countryName, co.id AS countryId
-                    // FROM App\Entity\City c
-                    // JOIN App\Entity\Image i WITH i.city = c
-                    // JOIN App\Entity\Country co WITH c.country = co
-                    // WHERE (
-                    //     SELECT COUNT(img.id) 
-                    //     FROM App\Entity\Image img 
-                    //     WHERE img.city = c.id 
-                    //     AND img.id <= i.id) 
-                    //     = 1
-                    // GROUP BY co.id
-                    // ->setParameter('city', $this->request->query->get('entityId'))
-                    ;
-
-            //     ->setBasePath('/uploads/images/'),
-
-            // CollectionField::new('images')->useEntryCrudForm(ImageCrudController::class),
+            ->setBasePath('uploads/images')
+            ->setUploadDir('public/uploads/images')
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
 
         yield ArrayField::new('images', 'Images')
-        ->setTemplatePath('admin/field/images.html.twig')
-                        
-            ->onlyOnDetail(
-                // [
-                    // ImageField::new('images', 'Image')
-                        // ->setBasePath('/uploads/images/')
-                        // ->setUploadDir('public/uploads/images/')
-                        // ->setRequired(false)
-                        // ->onlyOnForms(),
-                        
-                    // TextField::new('url', 'Image')
-                    //     ->onlyOnDetail(),
-                // ]
-            );
+            ->setTemplatePath('admin/field/images.html.twig')   
+            ->onlyOnDetail();
 
-        // yield AssociationField::new('images')->renderAsEmbeddedForm()
-        yield  AssociationField::new('country', 'Pays');
+        yield AssociationField::new('country', 'Pays')
+        ->autocomplete();
         // LanguageField::new('language'),
-        yield TextField::new('language', 'Langue');       
-        yield NumberField::new('demography', 'Démographie');
-        yield NumberField::new('area', 'Superficie')->setRequired(true);
+        yield TextField::new('language', 'Langue');   
+
+        yield NumberField::new('demography', 'Démographie')
+        ->hideOnIndex();
+
+        yield NumberField::new('area', 'Superficie')->setRequired(true)
+        ->hideOnIndex();
+
         yield DateTimeField::new('created_at', 'Créé le')->hideOnForm();
-        yield  DateTimeField::new('updated_at', 'Modifié le')->hideOnForm();
-        yield TextField::new('electricity', 'Electricité')
+
+        yield DateTimeField::new('updated_at', 'Modifié le')->hideOnForm();
+
+        $levels= [
+            'Non renseigné' => '',
+            'Bas' => 'low',
+            'Moyen' => 'medium',
+            'Haut' => 'high',
+        ];
+
+        yield ChoiceField::new('electricity', 'Electricité')
             ->setRequired(false)
-            ->onlyOnDetail();
-        yield  NumberField::new('timezone')
-            ->onlyOnDetail()
-            ->onlyOnForms()
+            ->hideOnIndex()
+            ->setChoices(array_combine($levels, $levels))
+            ->allowMultipleChoices()
+            ->renderExpanded()
+            ->renderAsBadges([
+                '' => 'info',
+                'low' => 'danger',
+                'medium' => 'warning',
+                'high' => 'success',
+            ]);     
+
+        yield NumberField::new('timezone')
+            ->hideOnIndex()
             ->setRequired(true);
-        yield TextField::new('sunshine_rate', 'Ensoleillement')
-            ->onlyOnDetail();
 
-            
+        yield ChoiceField::new('sunshine_rate', 'Ensoleillement')
+            ->hideOnIndex()
+            ->setChoices(array_combine($levels, $levels))
+            ->allowMultipleChoices()
+            ->renderExpanded()
+            ->renderAsBadges([
+                '' => 'info',
+                'low' => 'danger',
+                'medium' => 'warning',
+                'high' => 'success',
+            ]);     
 
-        //     AssociationField::new('images')
-        //     ->setFormType(ImageType::class)
-        // ->setLabel('Images')
+        yield NumberField::new('temperature_average', 'Température moyenne')
+            ->hideOnIndex();
 
-        // ->onlyOnDetail()
-            // AssociationField::new('images')->setCrudController(ImageCrudController::class)
+        yield NumberField::new('cost', 'Coût de la vie')
+            ->hideOnIndex();
 
-            // TextEditorField::new('images')
-            // ->setLabel('Images')
-            // ->setTemplatePath('@EasyAdmin/crud/field/images.html.twig')
-            // ->setCustomOption('images', $cities)
-            // ->hideOnForm()
-            // ->onlyOnDetail()
+        yield ChoiceField::new('housing', 'Logement')
+            ->hideOnIndex()
+            ->setChoices(array_combine($levels, $levels))
+            ->allowMultipleChoices()
+            ->renderExpanded()
+            ->renderAsBadges([
+                '' => 'info',
+                'low' => 'danger',
+                'medium' => 'warning',
+                'high' => 'success',
+            ]);     
 
-            // AssociationField::new('images')->setQueryBuilder(
-            //     fn (QueryBuilder $queryBuilder) => $queryBuilder->getEntityManager()->getRepository(Foo::class)->findCountryAndImageByCity()
-            // ),
+        yield TextField::new('environment', 'Environnement')
+            ->hideOnIndex();
 
-        // ];
+        yield ChoiceField::new('internet', 'Internet')
+        ->hideOnIndex()
+        ->setChoices(array_combine($levels, $levels))
+        ->allowMultipleChoices()
+        ->renderExpanded()
+        ->renderAsBadges([
+            '' => 'info',
+            'low' => 'danger',
+            'medium' => 'warning',
+            'high' => 'success',
+        ]);        
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

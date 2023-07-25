@@ -56,14 +56,14 @@ class AppFixtures extends Fixture
                     ->setArea($faker->numberBetween(1,300000))
                     ->setCost($faker->randomNumber(6, false))
                     ->setEnvironment($faker->word())
-                    ->setHousing($randomLevel)
+                    // ->setHousing($randomLevel)
                     ->setLanguage($faker->word())
-                    ->setInternet($randomLevel)
+                    // ->setInternet($randomLevel)
                     ->setDemography($faker->numberBetween(1, 40000000))
-                    ->setElectricity($randomLevel)
+                    // ->setElectricity($randomLevel)
                     ->setTimezone($faker->numberBetween(-12, 12))
                     ->setTemperatureAverage($faker->numberBetween(-50, 50))
-                    ->setSunshineRate($randomLevel)
+                    // ->setSunshineRate($randomLevel)
                     ->setCreatedAt($faker->dateTime())
                     ->setCountry($randomCountry);
                     // ->setRating($faker->numberBetween(1,5));

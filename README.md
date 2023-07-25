@@ -44,6 +44,8 @@ composer require easycorp/easyadmin-bundle
 
 php bin/console assets:install
 
+composer require symfony/mime
+
 ### API
 
 bin/console make:command

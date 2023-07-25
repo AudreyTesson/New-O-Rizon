@@ -1,9 +1,4 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
 {% extends '@EasyAdmin/crud/field/image.html.twig' %}
-
-{% block field %}
-    {% for city in options.cities %}
-        {% for image in city.images %}
-            <img src="{{ image.url }}" alt="Image {{ loop.index }}">
-        {% endfor %}
-    {% endfor %}
-{% endblock %}
