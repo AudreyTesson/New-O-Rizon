@@ -28,17 +28,15 @@ class CountryCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            AssociationField::new('cities')
-                ->onlyOnIndex(),
-            ArrayField::new('cities')
-                ->onlyOnDetail(),
-            BooleanField::new('visa_is_required'),
-            CurrencyField::new('currency'),
-            DateTimeField::new('created_at'),
-        ];
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('name');
+        yield AssociationField::new('cities')
+            ->onlyOnIndex();
+        yield ArrayField::new('cities')
+            ->onlyOnDetail();
+        yield BooleanField::new('visa_is_required');
+        yield CurrencyField::new('currency');
+        yield DateTimeField::new('created_at');
     }
 
     public function configureCrud(Crud $crud): Crud

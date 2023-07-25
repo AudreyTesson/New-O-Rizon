@@ -1,0 +1,9 @@
+{% extends '@EasyAdmin/crud/field/image.html.twig' %}
+
+{% block field %}
+    {% for city in options.cities %}
+        {% for image in city.images %}
+            <img src="{{ image.url }}" alt="Image {{ loop.index }}">
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

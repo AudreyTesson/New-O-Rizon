@@ -31,27 +31,36 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToRoute('Back to the website', 'fas fa-home', 'app_front_main');
+        yield MenuItem::linkToUrl('Back to the website', 'fas fa-home', '/');
 
-        yield MenuItem::subMenu('Cities', 'fas fa-bars')->setSubItems([
+        yield MenuItem::subMenu('Cities', 'fas fa-bars')->setSubItems(
+            [
             MenuItem::linkToCrud('Create City', 'fas fa-plus', City::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Cities', 'fas fa-eye', City::class),
-        ]);
+            ]
+        );
 
-        yield MenuItem::subMenu('Countries', 'fas fa-bars')->setSubItems([
+        yield MenuItem::subMenu('Countries', 'fas fa-bars')->setSubItems(
+            [
             MenuItem::linkToCrud('Create Country', 'fas fa-plus', Country::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Countries', 'fas fa-eye', Country::class),
-        ]);
+            ]
+        );
 
-        yield MenuItem::subMenu('Users', 'fas fa-user')->setSubItems([
+        yield MenuItem::subMenu('Users', 'fas fa-user')->setSubItems(
+            [
             MenuItem::linkToCrud('Create User', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Users', 'fas fa-eye', User::class),
-        ]);
+            ]
+        );
 
-        yield MenuItem::subMenu('Images', 'fas fa-image')->setSubItems([
+        yield MenuItem::subMenu('Images', 'fas fa-image')->setSubItems(
+            [
             MenuItem::linkToCrud('Create Image', 'fas fa-plus', Image::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Images', 'fas fa-eye', Image::class),
-        ]);
+            ]
+        );
+
     }
 
     public function configureCrud(): Crud
