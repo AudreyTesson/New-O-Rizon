@@ -58,7 +58,7 @@ class City
     #[ORM\ManyToOne(inversedBy: 'cities')]
     private ?Country $country = null;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -71,7 +71,7 @@ class City
     {
         $this->images = new ArrayCollection();
     }
-    
+
     public function __toString(): string
     {
         return $this->name;

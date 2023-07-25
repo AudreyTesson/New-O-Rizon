@@ -8,13 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CountryField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CurrencyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TimezoneField;
 use Symfony\Component\Validator\Constraints\Date;
 
 class CountryCrudController extends AbstractCrudController
@@ -29,13 +27,21 @@ class CountryCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
+
         yield TextField::new('name');
+
         yield AssociationField::new('cities')
             ->onlyOnIndex();
+
         yield ArrayField::new('cities')
-            ->onlyOnDetail();
-        yield BooleanField::new('visa_is_required');
-        yield CurrencyField::new('currency');
+            ->hideOnIndex();
+
+        yield BooleanField::new('visa_is_required')
+            ->hideOnIndex();
+
+        yield CurrencyField::new('currency')
+            ->hideOnIndex();
+
         yield DateTimeField::new('created_at');
     }
 

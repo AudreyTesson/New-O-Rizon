@@ -1,0 +1,14 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% if field.value >= 30 %}
+    <span class="fas fa-thermometer-three-quarters text-danger"></span>
+{% elseif field.value >= 20 %}
+    <span class="fas fa-thermometer-half text-warning"></span>
+{% elseif field.value >= 10 %}
+    <span class="fas fa-thermometer-quarter text-success"></span>
+{% else %}
+    <span class="fas fa-thermometer-empty text-info"></span>
+{% endif %}
+
+{{ field.formattedValue}}

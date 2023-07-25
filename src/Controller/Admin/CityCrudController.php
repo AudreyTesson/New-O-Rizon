@@ -3,23 +3,19 @@
 namespace App\Controller\Admin;
 
 use App\Entity\City;
-use App\Entity\Image;
-use App\Repository\CityRepository;
+use App\Entity\LevelsField;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\LanguageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Faker\Provider\ar_EG\Text;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +33,7 @@ class CityCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
 
         yield TextField::new('name', 'Nom');
-            // TextEditorField::new('description'),
+
         yield ImageField::new('picture')
             ->setBasePath('uploads/images')
             ->setUploadDir('public/uploads/images')
@@ -45,18 +41,25 @@ class CityCrudController extends AbstractCrudController
 
         yield ArrayField::new('images', 'Images')
             ->setTemplatePath('admin/field/images.html.twig')   
-            ->onlyOnDetail();
+            ->hideOnIndex()
+            // ->setFormTypeOption('by_reference', false)
+            ;
+
+        yield AssociationField::new('images', 'Images')
+            // ->setFormTypeOption('choice_label', 'url')
+            ->setFormTypeOption('by_reference', false)
+            ->autocomplete();
 
         yield AssociationField::new('country', 'Pays')
-        ->autocomplete();
+            ->autocomplete();
         // LanguageField::new('language'),
         yield TextField::new('language', 'Langue');   
 
         yield NumberField::new('demography', 'Démographie')
-        ->hideOnIndex();
+            ->hideOnIndex();
 
         yield NumberField::new('area', 'Superficie')->setRequired(true)
-        ->hideOnIndex();
+            ->hideOnIndex();
 
         yield DateTimeField::new('created_at', 'Créé le')->hideOnForm();
 
@@ -64,12 +67,13 @@ class CityCrudController extends AbstractCrudController
 
         $levels= [
             'Non renseigné' => '',
-            'Bas' => 'low',
-            'Moyen' => 'medium',
-            'Haut' => 'high',
+            'Bas' => 'Low',
+            'Moyen' => 'Medium',
+            'Haut' => 'High',
         ];
 
-        yield ChoiceField::new('electricity', 'Electricité')
+        yield LevelsField::new('electricity', 'Electricité')
+            ->setTemplatePath('admin/field/levels.html.twig')
             ->setRequired(false)
             ->hideOnIndex()
             ->setChoices(array_combine($levels, $levels))
@@ -77,9 +81,9 @@ class CityCrudController extends AbstractCrudController
             ->renderExpanded()
             ->renderAsBadges([
                 '' => 'info',
-                'low' => 'danger',
-                'medium' => 'warning',
-                'high' => 'success',
+                'Low' => 'danger',
+                'Medium' => 'warning',
+                'High' => 'success',
             ]);     
 
         yield NumberField::new('timezone')
@@ -93,13 +97,15 @@ class CityCrudController extends AbstractCrudController
             ->renderExpanded()
             ->renderAsBadges([
                 '' => 'info',
-                'low' => 'danger',
-                'medium' => 'warning',
-                'high' => 'success',
+                'Low' => 'danger',
+                'Medium' => 'warning',
+                'High' => 'success',
             ]);     
 
-        yield NumberField::new('temperature_average', 'Température moyenne')
-            ->hideOnIndex();
+        yield IntegerField::new('temperature_average', 'Température moyenne')
+            ->hideOnIndex()
+            ->setTemplatePath('admin/field/temperature_average.html.twig')   
+            ;
 
         yield NumberField::new('cost', 'Coût de la vie')
             ->hideOnIndex();
@@ -111,25 +117,26 @@ class CityCrudController extends AbstractCrudController
             ->renderExpanded()
             ->renderAsBadges([
                 '' => 'info',
-                'low' => 'danger',
-                'medium' => 'warning',
-                'high' => 'success',
+                'Low' => 'danger',
+                'Medium' => 'warning',
+                'High' => 'success',
             ]);     
 
         yield TextField::new('environment', 'Environnement')
             ->hideOnIndex();
 
         yield ChoiceField::new('internet', 'Internet')
-        ->hideOnIndex()
-        ->setChoices(array_combine($levels, $levels))
-        ->allowMultipleChoices()
-        ->renderExpanded()
-        ->renderAsBadges([
-            '' => 'info',
-            'low' => 'danger',
-            'medium' => 'warning',
-            'high' => 'success',
-        ]);        
+            ->hideOnIndex()
+            ->setChoices(array_combine($levels, $levels))
+            ->allowMultipleChoices()
+            ->renderExpanded()
+            ->renderAsBadges([
+                '' => 'info',
+                'Low' => 'danger',
+                'Medium' => 'warning',
+                'High' => 'success',
+            ]
+        );        
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

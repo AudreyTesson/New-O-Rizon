@@ -60,7 +60,6 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Show Images', 'fas fa-eye', Image::class),
             ]
         );
-
     }
 
     public function configureCrud(): Crud
