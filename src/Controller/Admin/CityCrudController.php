@@ -42,17 +42,14 @@ class CityCrudController extends AbstractCrudController
         yield ArrayField::new('images', 'Images')
             ->setTemplatePath('admin/field/images.html.twig')   
             ->hideOnIndex()
-            // ->setFormTypeOption('by_reference', false)
             ;
 
         yield AssociationField::new('images', 'Images')
-            // ->setFormTypeOption('choice_label', 'url')
             ->setFormTypeOption('by_reference', false)
             ->autocomplete();
 
         yield AssociationField::new('country', 'Pays')
             ->autocomplete();
-        // LanguageField::new('language'),
         yield TextField::new('language', 'Langue');   
 
         yield NumberField::new('demography', 'Démographie')
@@ -72,8 +69,7 @@ class CityCrudController extends AbstractCrudController
             'Haut' => 'High',
         ];
 
-        yield LevelsField::new('electricity', 'Electricité')
-            ->setTemplatePath('admin/field/levels.html.twig')
+        yield ChoiceField::new('electricity', 'Electricité')
             ->setRequired(false)
             ->hideOnIndex()
             ->setChoices(array_combine($levels, $levels))

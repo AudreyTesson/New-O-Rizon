@@ -37,13 +37,5 @@ class UserCrudController extends AbstractCrudController
             ->allowMultipleChoices()
             ->renderExpanded()
             ->renderAsBadges();
-            // ->setFormType(ChoiceType::class)
-            // ->setFormTypeOptions([
-            //     'choices' => array_combine($roles, $roles),
-            //     'multiple' => true,
-            //     'expanded' => true,
-            // ]);
-            // TextField::new('roles'),
-            // TextEditorField::new('description'),
     }
 }
