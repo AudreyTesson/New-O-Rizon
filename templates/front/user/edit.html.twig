@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du profil{% endblock %}
+
+{% block body %}
+<div class="container mx-auto">
+
+    <div class="flex flex-col justify-center items-center px-6 pb-12 lg:px-8">
+
+        <div class="w-full bg-[url('https://images.pexels.com/photos/134643/pexels-photo-134643.jpeg')] bg-cover bg-center">
+            <div class="w-auto h-48 flex justify-center items-center backdrop-brightness-50">
+                <span class="text-black text-center items-center bg-white shadow-md rounded "><h2 class="p-5 text-2xl font-bold w-fit">Modification</h2></span>
+            </div>
+        </div>
+
+        <div class="flex justify-center bg-slate-100 w-screen md:w-1/2 my-12">
+            <div class="flex justify-center bg-white shadow-md rounded px-8 pt-6 pb-8 my-10">
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_widget(form) }}
+                <button class="flex w-full justify-center rounded-md bg-cyan-900 px-3 py-1.5 text-base font-medium leading-6 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 mt-6">{{ button_label|default('Sauvegarder') }}</button>
+            {{ form_end(form) }}
+            
+            </div>
+        </div>
+    </div> 
+</div>
+
+{% endblock %}

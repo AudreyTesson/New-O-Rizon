@@ -36,6 +36,10 @@ composer require --dev bluemmb/faker-picsum-photos-provider ^2.0
 
 symfony console d:f:l
 
+#### flowbite for tailwindcss dropdown menu
+
+npm install flowbite
+
 ### SECURITY
 
 composer require symfony/security-bundle

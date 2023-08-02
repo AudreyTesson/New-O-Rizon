@@ -3,12 +3,15 @@ module.exports = {
   content: [
     'templates/**/*.html.twig',
     'templates/**/**/*.html.twig',
+    "./node_modules/flowbite/**/*.js",
     'assets/js/**/*.js',
     "./src/**/*.{html,js}",
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ]
 }
 
