@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/sign-in', name: 'app_front_sign_in')]
+    #[Route('/sign-in', name: 'app_front_sign_in', methods: ['GET', 'POST'])]
     public function new(UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
     {
         $user = new User();
@@ -45,7 +45,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/{id}', name:'app_front_user_show', requirements: ['id' => '\d+'])]
+    #[Route('/user/{id}', name:'app_front_user_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('front/user/show.html.twig', [
@@ -53,7 +53,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/{id}/edit', name:'app_front_user_edit', requirements: ['id' => '\d+'])]
+    #[Route('/user/{id}/edit', name:'app_front_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -76,7 +76,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/{id}/delete', name:'app_front_user_delete', requirements: ['id' => '\d+'])]
+    #[Route('/user/{id}/delete', name:'app_front_user_delete', requirements: ['id' => '\d+'], methods: ['DELETE'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {        

@@ -67,9 +67,20 @@ class City
     #[ORM\Column(nullable: true)]
     private array $internet = [];
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'cities')]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class)]
+    private Collection $reviews;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $rating = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -301,6 +312,72 @@ class City
                 $image->setCity(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        $this->users->removeElement($user);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getCity() === $this) {
+                $review->setCity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): static
+    {
+        $this->rating = $rating;
 
         return $this;
     }

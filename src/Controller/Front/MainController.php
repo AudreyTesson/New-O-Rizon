@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'app_front_main')]
+    #[Route('/', name: 'app_front_main', methods: ['GET'])]
     public function home(
         CityRepository $cityRepository,
     ): Response
@@ -23,12 +23,12 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/about-us', name: 'app_front_about_us')]
+    #[Route('/about-us', name: 'app_front_about_us', methods: ['GET'])]
     function aboutUs() {
         return $this->render('front/footer/about_us.html.twig');
     }
 
-    #[Route('/legal-notices', name: 'app_front_legal_notices')]
+    #[Route('/legal-notices', name: 'app_front_legal_notices', methods: ['GET'])]
     function legalNotices() {
         return $this->render('front/footer/legal_notices.html.twig');        
     }

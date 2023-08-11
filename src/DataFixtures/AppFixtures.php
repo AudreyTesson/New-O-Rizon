@@ -5,10 +5,12 @@ namespace App\DataFixtures;
 use App\Entity\City;
 use App\Entity\Country;
 use App\Entity\Image;
+use App\Entity\Review;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Bluemmb\Faker\PicsumPhotosProvider;
+use DateTime;
 use Faker\Factory;
 use Faker\Provider\fr_FR\Address;
 
@@ -123,6 +125,33 @@ class AppFixtures extends Fixture
                 ->setRoles(['ROLE_USER']);
 
         $manager->persist($user);
+
+        // create Reviews
+        $rating = [];
+        $user = [ $admin, $user];
+        foreach ($cities as $city) {
+            $randomNbReview = mt_rand(0, 5);
+
+            for ($i=0; $i < $randomNbReview; $i++) {
+                /** @var Review $newReview */
+                $newReview = new Review();
+                $newReview->setUser($user[mt_rand(0, count($user)-1)]);
+                $newReview->setContent($faker->realText(30, 1));
+                $newReview->setRating($faker->numberBetween(1, 5));
+
+                $newReview->setCreatedAt(new DateTime($faker->date()));
+
+                $rating[] = $newReview->getRating();
+                $sum = array_sum($rating);
+                $count = count($rating);
+                $average = round($sum/$count, 1);
+                $city->setRating($average);
+                $newReview->setCity($city);
+
+                $manager->persist($newReview);
+
+            }
+        }
 
         $manager->flush();
     }

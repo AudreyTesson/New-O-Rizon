@@ -56,6 +56,8 @@ php bin/console assets:install
 
 composer require symfony/mime
 
+php bin/console make:admin:dashboard
+
 ### API
 
 bin/console make:command
@@ -71,6 +73,7 @@ https://tailwindcss.com/docs/guides/symfony
 npm install -D tailwindcss postcss postcss-loader autoprefixer
 npx tailwindcss init -p
 ```	
+
 ### Run TailwindCSS :	
 ```bash	
 npm run watch

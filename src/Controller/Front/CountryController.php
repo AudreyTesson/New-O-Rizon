@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CountryController extends AbstractController
 {
-    #[Route('/country', name: 'app_front_country')]
+    #[Route('/country', name: 'app_front_country', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('front/country/index.html.twig', [

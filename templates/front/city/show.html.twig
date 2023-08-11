@@ -277,5 +277,49 @@
     </div>
     
 </div>  
+<div class="relative">
+    {# {% include 'partials/_slide_buttons.html.twig' %} #}
+
+    <div class="flex mx-auto flex-col justify-center">
+
+        <div class="flex justify-center mx-auto my-4 w-fit">
+            <a href="{{ path('app_front_review_add', {'id':city.id})}}">
+                <button class="w-full hover:bg-sky-600 hover:text-white text-base leading-4 font-bold py-4 px-10 text-cyan-900 bg-white border-gray-900 border-2 rounded-lg">Ajouter un commentaire</button>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 justify-center mx-auto">
+
+            {% for review in allReviewFromBDD %}
+
+                <div class="block my-2 mx-2 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <div class="space-y-1 font-medium dark:text-white">
+                        <p>Par {{ review.user.username }}</p>
+                        <span class="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Commenté le {{ review.createdAt|date('d-m-Y') }}</p>
+                    </div>
+
+                    <div class="flex items-center mb-1">
+
+                        {# {% include '/partials/_stars.html.twig' with {'ratingStars': review.rating} %} #}
+
+                    </div>
+
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">{{ review.content}}</p>
+
+                </div>
+
+            {% else %}
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <p><span class="ps-1">Cette ville n'a pas encore de commentaires<p></span>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>   
+
+    </div>   
 
 {% endblock %}
