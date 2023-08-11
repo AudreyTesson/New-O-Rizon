@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReviewController extends AbstractController
 {
-    #[Route('/reviews/{id}/review/add', name: 'app_front_review_add', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[Route('/reviews/{id}/review/add', name: 'app_front_review_add', requirements: ['id' => '\d+'])]
     public function index(
         $id,
         CityRepository $cityRepository,

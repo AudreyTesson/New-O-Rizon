@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/sign-in', name: 'app_front_sign_in', methods: ['GET', 'POST'])]
+    #[Route('/sign-in', name: 'app_front_sign_in')]
     public function new(UserPasswordHasherInterface $passwordHasher, Request $request, UserRepository $userRepository): Response
     {
         $user = new User();

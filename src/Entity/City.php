@@ -58,7 +58,7 @@ class City
     #[ORM\ManyToOne(inversedBy: 'cities')]
     private ?Country $country = null;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class, orphanRemoval: true, cascade: ['remove'])]
     private Collection $images;
 
     #[ORM\Column(length: 255, nullable: true)]

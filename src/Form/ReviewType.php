@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Review;
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use PharIo\Manifest\Email;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,12 +19,17 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EntityType::class, [
-                "label" => "email",
-                "multiple" => false,
-                "expanded" => false,
+            ->add('user', EntityType::class, [
+                // "label" => "email",
+                "multiple" => true,
+                // "expanded" => false,
                 "class" => User::class,
-                "choice_label" => "email",  
+                
+                // "choice_label" => "email",  
+                'choice_label' => 
+                function (User $user): string {
+    return $user->getUsername();
+}
             ])
             ->add('content', TextareaType::class, [
                 "label" => "Votre commentaire : ",
