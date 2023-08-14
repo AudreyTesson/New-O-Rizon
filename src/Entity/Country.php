@@ -34,7 +34,7 @@ class Country
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'country', targetEntity: City::class)]
+    #[ORM\OneToMany(mappedBy: 'country', targetEntity: City::class, cascade: ['detach'])]
     private Collection $cities;
 
     #[ORM\OneToOne(mappedBy: 'country', cascade: ['persist', 'remove'])]

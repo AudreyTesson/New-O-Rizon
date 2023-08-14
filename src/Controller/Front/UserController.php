@@ -22,7 +22,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // get password to hash before setting property
             $plaintextPassword = $user->getPassword();
             $passwordHashed = $passwordHasher->hashPassword($user, $plaintextPassword);
             $user->setPassword($passwordHashed);

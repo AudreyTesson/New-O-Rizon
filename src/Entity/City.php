@@ -55,7 +55,7 @@ class City
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $environment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cities')]
+    #[ORM\ManyToOne(inversedBy: 'cities', cascade: ['detach'])]
     private ?Country $country = null;
 
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class, orphanRemoval: true, cascade: ['remove'])]
@@ -70,7 +70,7 @@ class City
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'cities')]
     private Collection $users;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class)]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class, cascade: ['remove'])]
     private Collection $reviews;
 
     #[ORM\Column(nullable: true)]
