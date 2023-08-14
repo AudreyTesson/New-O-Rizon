@@ -3,15 +3,15 @@
         <script src="{{ asset('js/modal.js') }}"></script>
 
         {% set route = app.request.attributes.get('_route') %}
-        {% if route in ["cities_list", "sort_asc", "sort_desc", "cities_country", "app_front_city_search"] or app.request.requestUri matches '/filter_data/' %}
+        {% if route in ["app_front_cities_list", "sort_asc", "sort_desc", "app_front_cities_country", "app_front_city_search"] or app.request.requestUri matches '/filter_data/' %}
             <script src="{{ asset('js/sort.js') }}"></script>
         {% endif %}
 
-        {% if route == 'cities_list' or route == 'cities_detail' or route == 'sort_asc' or route == 'sort_desc' or route == 'cities_country' or route == 'favorites' %}
+        {% if route == 'app_front_cities_list' or route == 'app_front_cities_detail' or route == 'sort_asc' or route == 'sort_desc' or route == 'app_front_cities_country' or route == 'app_front_favorites' %}
             <script src="{{ asset('js/scroll.js') }}"></script>
         {% endif %}
 
-        {% if route == "cities_detail" %}
+        {% if route == "app_front_cities_detail" %}
             <script src="{{ asset('js/moreCriteria.js') }}"></script>
             {# MAP with Leaflet #}
             <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -23,11 +23,11 @@
         {% if isFilterData %}
             <script src="{{ asset('js/sidebar_filter_data.js')}}"></script>
             <script src="{{ asset('js/reset_filter.js') }}"></script>
-        {% elseif route == 'default' %}
+        {% elseif route == 'app_front_main' %}
             <script src="{{ asset('js/sidebar_filter_homepage.js')}}"></script>
-        {% elseif route == 'cities_list' %}
+        {% elseif route == 'app_front_cities_list' %}
             <script src="{{ asset('js/sidebar_filter_cities.js')}}"></script>
-        {% elseif route == 'cities_country' %}
+        {% elseif route == 'app_front_cities_country' %}
             <script src="{{ asset('js/sidebar_filter_citiesCountry.js')}}"></script>
         {% elseif route == "sort_asc" %}
             <script src="{{ asset('js/sidebar_filter_asc.js')}}"></script>

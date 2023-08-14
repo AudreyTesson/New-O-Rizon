@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Data\FilterData;
+use App\Form\FilterDataType;
 use App\Repository\CityRepository;
 use App\Repository\CountryRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -42,12 +43,12 @@ class CountryController extends AbstractController
             $citiesFilter = $cityRepository->findByFilter($criteria);
             $citiesFilter = $paginator->paginate($citiesFilter, $request->query->getInt('page', 1),6);
 
-            return $this->render('front/cities/list.html.twig', ["citiesFilter" => $citiesFilter, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
+            return $this->render('front/city/index.html.twig', ["citiesFilter" => $citiesFilter, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
         }
 
         $citiesCountry = $paginator->paginate($citiesCountry, $request->query->getInt('page', 1),6);
 
-        return $this->render("front/cities/list.html.twig",
+        return $this->render("front/city/index.html.twig",
             [
                'citiesCountry' => $citiesCountry,
                'cities' => $cities,

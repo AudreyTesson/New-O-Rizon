@@ -7,7 +7,7 @@
 {% set route = app.request.attributes.get("_route") %}
 {% set isAsc = app.request.requestUri ends with ('/cities/asc') %}
 {% set isDesc = app.request.requestUri ends with ('/cities/desc') %}
-{% if route == "cities_list" or isAsc or isDesc %}
+{% if route == "app_front_cities_list" or isAsc or isDesc %}
     {% include 'partials/_sort.html.twig' %}
 {% endif %}
 
@@ -57,11 +57,11 @@
 
                     {% if isSorted %}
 
-                        {% if sortOption == 'ASC' %}
+                        {# {% if sortOption == 'ASC' %}
                             
                         {% else %}
                             
-                        {% endif %}
+                        {% endif %} #}
 
                         {% include 'partials/_cities_list.html.twig' %}
 
@@ -98,9 +98,9 @@
 
                     {% if isSorted %}
 
-                        {% if sortOption == 'asc' %}
+                        {# {% if sortOption == 'asc' %}
                         {% else %}
-                        {% endif %}
+                        {% endif %} #}
 
                         {% include 'partials/_cities_list.html.twig' %}
 

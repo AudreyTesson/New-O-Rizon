@@ -32,7 +32,7 @@
 
                 {# Back to top button #}
         {% set route = app.request.get('_route') %}
-        {% if route == 'cities_list' or route == 'cities_detail' or route == 'sort_asc' or route == 'sort_desc' or route == 'cities_country' or route == "favorites" %}
+        {% if route == 'app_front_cities_list' or route == 'app_front_cities_detail' or route == 'sort_asc' or route == 'sort_desc' or route == 'app_front_cities_country' or route == "app_front_favorites" %}
         <button id="to-top-button" title="Go To Top" class="hidden md:hidden fixed z-40 bottom-8 right-5 border-0 w-10 h-10 drop-shadow-md bg-cyan-900 text-white text-4xl font-bold">&uarr;</button>
         {% endif %}
         

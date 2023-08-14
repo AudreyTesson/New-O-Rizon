@@ -41,6 +41,7 @@ class CityController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
+        dump($cities);
 
         $criteria = new FilterData();
         $formFilter = $this->createForm(FilterDataType::class, $criteria);
@@ -51,7 +52,7 @@ class CityController extends AbstractController
             $citiesFilter = $cityRepository->findByFilter($criteria);
             $citiesFilter = $paginator->paginate($citiesFilter, $request->query->getInt('page', 1),6);
 
-            return $this->render('front/cities/list.html.twig', [
+            return $this->render('front/city/index.html.twig', [
                 "citiesFilter" => $citiesFilter, 
                 "cities" => $cities, 
                 "formFilter" => $formFilter->createView(),
@@ -60,6 +61,7 @@ class CityController extends AbstractController
 
         return $this->render('front/city/index.html.twig', [
             'cities' => $cities,
+            'formFilter' => $formFilter->createView(),
         ]);
     }
 

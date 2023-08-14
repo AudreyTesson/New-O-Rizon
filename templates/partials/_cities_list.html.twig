@@ -1,9 +1,9 @@
 {% set isCitiesCountry = (app.request.attributes.get("_route") ends with "country") %}
 {% set isCitiesList = app.request.requestUri ends with "/cities" %}
-{% set isCitiesListPaginate = app.request.requestUri matches '/cities?page' %}
+{% set isCitiesListPaginate = app.request.requestUri matches '/\\/cities\\?page/' %}
 {% set isSortedASC = app.request.requestUri ends with "/cities/asc" %}
 {% set isSortedDESC = app.request.requestUri ends with "/cities/desc" %}
-{% set isCitiesFiltered = app.request.requestUri matches 'filter_data' %}
+{% set isCitiesFiltered = app.request.requestUri matches '/filter_data/' %}
 {% set isCitiesSearch = (app.request.attributes.get("_route") ends with "search") %}
 
 {% if isCitiesCountry %}
@@ -184,5 +184,7 @@
 
 
 {% endif %}
-
     </div>
+{% endif %}
+
+

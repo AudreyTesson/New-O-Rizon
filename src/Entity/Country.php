@@ -40,13 +40,9 @@ class Country
     #[ORM\OneToOne(mappedBy: 'country', cascade: ['persist', 'remove'])]
     private ?Image $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'country', targetEntity: City::class)]
-    private Collection $cities1;
-
     public function __construct()
     {
         $this->cities = new ArrayCollection();
-        $this->cities1 = new ArrayCollection();
     }
 
     public function getId(): ?int

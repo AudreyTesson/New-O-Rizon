@@ -3,7 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Data\FilterData;
-use App\Form\Front\FilterDataType;
+use App\Form\FilterDataType;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,12 +31,12 @@ class SortController extends AbstractController
             $citiesFilter = $cityRepository->findByFilter($criteria, 'ASC');
             $citiesFilter = $paginatorInterface->paginate($citiesFilter, $request->query->getInt('page', 1),9);
 
-            return $this->render('front/cities/list.html.twig', ["citiesFilter" => $citiesFilter, 'sortOption' => $order, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
+            return $this->render('front/city/index.html.twig', ["citiesFilter" => $citiesFilter, 'sortOption' => $order, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
         }
 
         $cities = $paginatorInterface->paginate($cities, $request->query->getInt('page', 1),9);
 
-        return $this->render('front/cities/list.html.twig', [
+        return $this->render('front/city/index.html.twig', [
             'cities' => $cities,
             'sortOption' => $order,
             'formFilter' => $formFilter->createView()
@@ -61,12 +61,12 @@ class SortController extends AbstractController
             $citiesFilter = $cityRepository->findByFilter($criteria, 'DESC');
             $citiesFilter = $paginatorInterface->paginate($citiesFilter, $request->query->getInt('page', 1),9);
 
-            return $this->render('front/cities/list.html.twig', ["citiesFilter" => $citiesFilter, 'sortOption' => $order, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
+            return $this->render('front/city/index.html.twig', ["citiesFilter" => $citiesFilter, 'sortOption' => $order, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
         }
 
         $cities = $paginatorInterface->paginate($cities, $request->query->getInt('page', 1), 9);
     
-        return $this->render('front/cities/list.html.twig', [
+        return $this->render('front/city/index.html.twig', [
             'cities' => $cities,
             'sortOption' => $order,
             'formFilter' => $formFilter->createView()

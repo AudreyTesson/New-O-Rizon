@@ -40,6 +40,39 @@ class CityRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCountry($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.country', 'co', 'WITH', 'co.id = :country_id')
+            ->innerJoin('c.images', 'i')
+            ->setParameter('country_id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByCityName($search)
+    {
+        $entityManager = $this->getEntityManager();
+        $queryBuilder = $entityManager->createQueryBuilder();
+
+        $queryBuilder->select('c.id AS cityId, c.name AS cityName, c.rating AS cityRating, co.id AS countryId, co.name AS countryName, i.id AS imageId, i.url AS imageUrl')
+            ->from(City::class, 'c')
+            ->where($queryBuilder->expr()->like('c.name', ':name'))
+            ->innerJoin('c.country', 'co')
+            ->innerJoin('c.images', 'i')
+            ->andWhere($queryBuilder->expr()->eq(
+                '(SELECT COUNT(img.id) 
+                    FROM App\Entity\Image img 
+                    WHERE img.city = c.id 
+                    AND img.id <= i.id)',
+                1
+            ))
+            ->orderBy('c.name', 'ASC')
+            ->setParameter('name', "$search%");
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     public function findCountryAndImageByCity($order = null)
     {
         $entityManager = $this->getEntityManager();

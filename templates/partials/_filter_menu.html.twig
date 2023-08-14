@@ -285,7 +285,6 @@
 
                 <div class="flex flex-wrap md:flex-nowrap gap-3 justify-center pb-2 text-gray-500 border border-b-0 border-gray-200 bg-gray-100 rounded-b-xl sticky bottom-0 pt-3">
 
-                {# {% set isFiltered = app.request.requestUri | urlContains('filter_data') %} #}
                 {% set isFiltered = app.request.requestUri matches '/filter_data/' %}
 
                 {% if isFiltered %}

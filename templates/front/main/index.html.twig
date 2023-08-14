@@ -21,6 +21,33 @@
 			</span>
 		</div>
 
+        {# Search bar #}
+		<div class="mb-3 flex justify-center lg:hidden">
+			<div class="bg-cyan-900 p-1 w-fit rounded-lg">
+				<div class="flex mx-2 space-x-4 items-center">
+
+					{# Filter button #}
+					<button id="filter_btn_mobile" aria-label="Ouvrir" type="button">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m-6 8a2 2 0 1 0 0-4m0 4a2 2 0 1 1 0-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 1 0 0-4m0 4a2 2 0 1 1 0-4m0 4v2m0-6V4"/></svg>
+					</button>
+
+					{# Cities Search Form#}
+					<form class="justify-between" action="{{ path('app_front_city_search')}}">
+						<input class="bg-gray-100 outline-none rounded-xl border border-solid" type="text" name="search" placeholder="Recherche par ville"/>
+						<button type="submit" id="loupe">
+							<i class="fa fa-search text-lg text-white" aria-hidden="false"></i>
+						</button>
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+
+        		{# carousel #}
+		{# {{ include ('partials/_slide_buttons.html.twig') }} #}
+
+
     </div>
 
     <!-- desktop version -->
@@ -30,6 +57,28 @@
         <div class="relative h-screen w-full grid">
 
             {% include "partials/_map_homepage.html.twig" %}
+
+            {# Search bar #}
+            <div class="absolute my-3 top-8 left-8 mb-3">
+				<div class="flex bg-cyan-900 w-80 space-x-4 rounded-xl justify-center">
+					<div class="flex mx-2 space-x-4 justify-center">
+
+						{# Filter button #}
+						<button id="filter_btn" aria-label="Ouvrir" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m-6 8a2 2 0 1 0 0-4m0 4a2 2 0 1 1 0-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 1 0 0-4m0 4a2 2 0 1 1 0-4m0 4v2m0-6V4"/></svg>
+						</button>
+
+						{# Cities Search Form#}
+						<form class="justify-between" action="{{ path('app_front_city_search')}}">
+							<input class="bg-gray-100 outline-none rounded-xl border border-solid my-1" type="text" name="search" placeholder="Recherche par ville"/>
+							<button type="submit" id="loupe">
+								<i class="fa fa-search text-xl text-white" aria-hidden="false"></i>
+							</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
 
         {# text xl and + #}
         <div class="hidden xl:block absolute left-8 2xl:bottom-60 xl:bottom-48 bottom-72 backdrop-brightness-10 ">

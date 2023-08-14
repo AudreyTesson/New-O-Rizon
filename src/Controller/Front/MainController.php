@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'app_front_main', methods: ['GET'])]
+    #[Route('/', name: 'app_front_main')]
     public function home(
         CityRepository $cityRepository, 
         Request $request, 
@@ -33,10 +33,46 @@ class MainController extends AbstractController
             $citiesFilter = $cityRepository->findByFilter($criteria);
             $citiesFilter = $paginator->paginate($citiesFilter, $request->query->getInt('page', 1),6);
 
-            return $this->render('front/cities/index.html.twig', ["citiesFilter" => $citiesFilter, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
+            return $this->render('front/city/index.html.twig', ["citiesFilter" => $citiesFilter, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
         }
 
         return $this->render('front/main/index.html.twig', [
+            'formFilter' => $formFilter->createView(),
+            'cities' => $cities,
+        ]);
+    }
+
+    #[Route('/search', name: 'app_front_city_search')]
+    public function search(
+        CityRepository $cityRepository, 
+        Request $request,
+        PaginatorInterface $paginator): Response
+    {   
+        $search = $request->query->get('search', '');
+
+        $cities = $cityRepository->findByCityName($search);
+        
+        if ($cities === []) {
+            throw $this->createNotFoundException("Cette ville n'est pas répertoriée/n'existe pas");
+        }
+
+        $cities = $paginator->paginate($cities, $request->query->getInt('page', 1),6);
+        
+        // sidebar filter form
+        $criteria = new FilterData();
+        $formFilter = $this->createForm(FilterDataType::class, $criteria);
+        $formFilter->handleRequest($request);
+        
+
+        if ($formFilter->isSubmitted() && $formFilter->isValid()) {
+
+            $citiesFilter = $cityRepository->findByFilter($criteria);
+            $citiesFilter = $paginator->paginate($citiesFilter, $request->query->getInt('page', 1),6);
+
+            return $this->render('front/city/index.html.twig', ["citiesFilter" => $citiesFilter, "cities" => $cities, 'formFilter' => $formFilter->createView(),]);
+        }
+
+        return $this->render('front/city/index.html.twig', [
             'formFilter' => $formFilter->createView(),
             'cities' => $cities,
         ]);
