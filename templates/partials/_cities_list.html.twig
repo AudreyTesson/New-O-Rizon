@@ -30,7 +30,7 @@
             </div>
         </a>
 
-{% if isCitiesList %}
+{% elseif isSortedASC or isSortedDESC or isCitiesList %}
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
@@ -82,7 +82,7 @@
             </div>
         </a>
 
-{% elseif isCitiesSearch %}
+{% elseif isCitiesSearch or isCitiesListPaginate %}
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
@@ -106,85 +106,7 @@
                 </div>
             </div>
         </a>
-
-{% elseif isCitiesListPaginate %}
-
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
-            <div class="w-full h-96 relative overflow-hidden">
-                <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
-                style="background-image:url('{{ city.imageUrl }}')">
-                </div>
-                <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
-                    <h2 class="p-2 text-2xl font-bold w-fit">
-                        {{ city.cityName }}</h2>
-                    <h2 class="p-2 text-2xl font-bold w-fit">
-                        {{ city.countryName}}</h2>
-                    {% include "/partials/_favorites.html.twig" %}
-                </span>
-
-                {# stars rating #}
-                <div class="absolute inset-x-0 bottom-4 flex justify-center drop-shadow-lg">
-                {% set ratingStars = city.cityRating|round %}
-                {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %}
-                </div>
-            </div>
-        </a>
-
-{% elseif isSortedASC %}
-
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
-            <div class="w-full h-96 relative overflow-hidden">
-                <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
-                style="background-image:url('{{ city.imageUrl }}')">
-                </div>
-                <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
-                    <h2 class="p-2 text-2xl font-bold w-fit">
-                        {{ city.cityName }}</h2>
-                    <h2 class="p-2 text-2xl font-bold w-fit">
-                        {{ city.countryName}}</h2>
-                    {% include "/partials/_favorites.html.twig" %}
-                </span>
-
-                {# stars rating #}
-                <div class="absolute inset-x-0 bottom-4 flex justify-center drop-shadow-lg">
-                {% set ratingStars = city.cityRating|round %}
-                {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %}
-                </div>
-            </div>
-        </a>
-
-{% elseif isSortedDESC %}
-
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
-            <div class="w-full h-96 relative overflow-hidden">
-                <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
-                style="background-image:url('{{ city.imageUrl }}')">
-                </div>
-                <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
-                    <h2 class="p-2 text-2xl font-bold w-fit">
-                        {{ city.cityName }}</h2>
-                    <h2 class="p-2 text-2xl font-bold w-fit">
-                        {{ city.countryName}}</h2>
-                    {% include "/partials/_favorites.html.twig" %}
-                </span>
-
-                {# stars rating #}
-                <div class="absolute inset-x-0 bottom-4 flex justify-center drop-shadow-lg">
-                {% set ratingStars = city.cityRating|round %}
-                {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %}
-                </div>
-            </div>
-        </a>
-
 
 {% endif %}
+
     </div>
-{% endif %}
-
-

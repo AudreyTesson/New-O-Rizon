@@ -2,13 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>{% block title %}New O Rizon{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+        {# font family #}
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=atkinson-hyperlegible:400,400i,700,700i" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+        {# favicon #}
+        <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon" />
+
+        {# <link rel="stylesheet" href="{{ asset('css/style.css')}}"> #}
         {# FlowBite for Tailwind CSS dropdown menu #}
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+            <link href="https://fonts.bunny.net/css?family=atkinson-hyperlegible:400,400i,700,700i" rel="stylesheet" />
         {% endblock %}
 
         {% block javascripts %}

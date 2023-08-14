@@ -272,13 +272,13 @@
             </div>
 
             {# api weather integration #}
-            <div class="weather">
+            <div class = "w-1/6 ml-2">
                 {# text hidden mobile version #}
-                <h2 class="weather-title">Météo actuelle :</h2>
+                <h2 class="hidden md:block pb-1 text-md w-fit">Météo actuelle :</h2>
                 <ion-icon name="rainy-outline" size="large"></ion-icon>
                 {# text hidden mobile version #}
-                <h2 class="weather-temperature">Température :</h2>
-                <h2 class="weather-value">
+                <h2 class="hidden md:block text-md w-fit">Température :</h2>
+                <h2 class="p-1 text-md w-fit">
                     {{ city.temperatureAverage }} °C
                 </h2>
             </div>
@@ -288,8 +288,9 @@
     </div>
     
 </div>  
+
 <div class="relative">
-    {# {% include 'partials/_slide_buttons.html.twig' %} #}
+    {% include 'partials/_slide_buttons.html.twig' %}
 
     <div class="flex mx-auto flex-col justify-center">
 
@@ -311,7 +312,7 @@
 
                     <div class="flex items-center mb-1">
 
-                        {# {% include '/partials/_stars.html.twig' with {'ratingStars': review.rating} %} #}
+                        {% include '/partials/_stars.html.twig' with {'ratingStars': review.rating} %}
 
                     </div>
 

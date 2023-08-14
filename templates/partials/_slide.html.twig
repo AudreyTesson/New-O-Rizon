@@ -1,0 +1,60 @@
+{% set isCities = (app.request.attributes.get("_route") ends with "app_front_main") %}
+{% set isCity = (app.request.attributes.get("_route") ends with "app_front_cities_detail") %}
+
+{% if isCities %}
+
+    {# Mobile version with carousel #}
+    <div id="default-carousel" class="relative w-full block lg:hidden" data-carousel="slide" >
+
+        <div class="relative h-56 w-10/12 overflow-hidden rounded-lg mx-auto mt-12 md:w-3/5">
+
+            {% for city in cities %}
+
+                <a href="{{ path('app_front_cities_detail', {'id': city.id}) }}">
+                    <div class="duration-700 ease-in-out" data-carousel-item>
+                        
+                            <div class="w-full h-full absolute transition-transform duration-300 x-2 -translate-x -translate-y hover:scale-105"
+                                style="background-image:url('{{ city.imageUrl }}')"
+                                alt="Photo d'une ville au hasard">
+                            </div>
+
+                        <div>
+                            <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
+                                <h2 class="p-2 text-base md:text-2xl font-bold w-fit">
+                                    {{ city.name }}</h2>
+                                <h2 class="p-2 text-base md:text-2xl font-bold w-fit">
+                                    {{ city.countryName}}</h2>
+                                {% include "/partials/_favorites.html.twig" %}
+
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+{% endif %}
+
+{% if isCity %}
+
+    {# Desktop version with carousel #}
+    <div id="default-carousel" class="relative w-11/12 inset-x-6 mt-8 my-2 md:w-2/3 xl:left-72 lg:left-44 md:left-36 md:my-8" data-carousel="slide" >
+
+        <div class="relative overflow-hidden md:mx-3 rounded-lg h-56 md:h-64 lg:80 2xl:h-96">
+
+            {% for images in city.images %}
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                
+                    <img
+                        src="{{ images.url }}"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                        alt="Photo d'une ville au hasard"/>
+                
+                </div> 
+            {% endfor %}   
+
+        </div> 
+
+{% endif %}
