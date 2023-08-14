@@ -22,7 +22,7 @@ class CityController extends AbstractController
         $this->client = $client;
     }
 
-    #[Route('/cities', name: 'app_front_cities_list', methods: ['GET'])]
+    #[Route('/cities', name: 'app_front_cities_list')]
     public function index(
         CityRepository $cityRepository,
         Request $request,
@@ -45,7 +45,7 @@ class CityController extends AbstractController
         ]);
     }
 
-    #[Route('/cities/{id}', name: 'app_front_cities_detail', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/cities/{id}', name: 'app_front_cities_detail', requirements: ['id' => '\d+'])]
     function show(
         $id,
         CityRepository $cityRepository,

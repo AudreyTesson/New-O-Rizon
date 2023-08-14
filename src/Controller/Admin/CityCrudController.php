@@ -34,10 +34,10 @@ class CityCrudController extends AbstractCrudController
 
         yield TextField::new('name', 'Nom');
 
-        yield ImageField::new('picture')
-            ->setBasePath('uploads/images')
-            ->setUploadDir('public/uploads/images')
-            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
+        // yield ImageField::new('picture')
+        //     ->setBasePath('uploads/images')
+        //     ->setUploadDir('public/uploads/images')
+        //     ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
 
         yield ArrayField::new('images', 'Images')
             ->setTemplatePath('admin/field/images.html.twig')   
@@ -69,34 +69,40 @@ class CityCrudController extends AbstractCrudController
             'Haut' => 'High',
         ];
 
-        yield ChoiceField::new('electricity', 'Electricité')
-            ->setRequired(false)
+        // yield ChoiceField::new('electricity', 'Electricité')
+        //     ->setRequired(false)
+        //     ->hideOnIndex()
+        //     ->setChoices(array_combine($levels, $levels))
+        //     ->allowMultipleChoices()
+        //     ->renderExpanded()
+        //     ->renderAsBadges([
+        //         '' => 'info',
+        //         'Low' => 'danger',
+        //         'Medium' => 'warning',
+        //         'High' => 'success',
+        //     ]);     
+        yield TextField::new('electricity', 'Electricité')
             ->hideOnIndex()
-            ->setChoices(array_combine($levels, $levels))
-            ->allowMultipleChoices()
-            ->renderExpanded()
-            ->renderAsBadges([
-                '' => 'info',
-                'Low' => 'danger',
-                'Medium' => 'warning',
-                'High' => 'success',
-            ]);     
+            ->setRequired(true);
 
         yield NumberField::new('timezone')
             ->hideOnIndex()
             ->setRequired(true);
 
-        yield ChoiceField::new('sunshine_rate', 'Ensoleillement')
+        // yield ChoiceField::new('sunshine_rate', 'Ensoleillement')
+        //     ->hideOnIndex()
+        //     ->setChoices(array_combine($levels, $levels))
+        //     ->allowMultipleChoices()
+        //     ->renderExpanded()
+        //     ->renderAsBadges([
+        //         '' => 'info',
+        //         'Low' => 'danger',
+        //         'Medium' => 'warning',
+        //         'High' => 'success',
+        //     ]);     
+        yield TextField::new('sunshine_rate', 'Ensoleillement')
             ->hideOnIndex()
-            ->setChoices(array_combine($levels, $levels))
-            ->allowMultipleChoices()
-            ->renderExpanded()
-            ->renderAsBadges([
-                '' => 'info',
-                'Low' => 'danger',
-                'Medium' => 'warning',
-                'High' => 'success',
-            ]);     
+            ->setRequired(true);
 
         yield IntegerField::new('temperature_average', 'Température moyenne')
             ->hideOnIndex()
@@ -106,33 +112,39 @@ class CityCrudController extends AbstractCrudController
         yield NumberField::new('cost', 'Coût de la vie')
             ->hideOnIndex();
 
-        yield ChoiceField::new('housing', 'Logement')
+        // yield ChoiceField::new('housing', 'Logement')
+        //     ->hideOnIndex()
+        //     ->setChoices(array_combine($levels, $levels))
+        //     ->allowMultipleChoices()
+        //     ->renderExpanded()
+        //     ->renderAsBadges([
+        //         '' => 'info',
+        //         'Low' => 'danger',
+        //         'Medium' => 'warning',
+        //         'High' => 'success',
+        //     ]);     
+        yield TextField::new('housing', 'Logement')
             ->hideOnIndex()
-            ->setChoices(array_combine($levels, $levels))
-            ->allowMultipleChoices()
-            ->renderExpanded()
-            ->renderAsBadges([
-                '' => 'info',
-                'Low' => 'danger',
-                'Medium' => 'warning',
-                'High' => 'success',
-            ]);     
+            ->setRequired(true);
 
         yield TextField::new('environment', 'Environnement')
             ->hideOnIndex();
 
-        yield ChoiceField::new('internet', 'Internet')
+        // yield ChoiceField::new('internet', 'Internet')
+        //     ->hideOnIndex()
+        //     ->setChoices(array_combine($levels, $levels))
+        //     ->allowMultipleChoices()
+        //     ->renderExpanded()
+        //     ->renderAsBadges([
+        //         '' => 'info',
+        //         'Low' => 'danger',
+        //         'Medium' => 'warning',
+        //         'High' => 'success',
+        //     ]
+        yield TextField::new('internet', 'Internet')
             ->hideOnIndex()
-            ->setChoices(array_combine($levels, $levels))
-            ->allowMultipleChoices()
-            ->renderExpanded()
-            ->renderAsBadges([
-                '' => 'info',
-                'Low' => 'danger',
-                'Medium' => 'warning',
-                'High' => 'success',
-            ]
-        );        
+            ->setRequired(true);
+        // );        
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

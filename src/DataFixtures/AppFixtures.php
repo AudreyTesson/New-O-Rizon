@@ -58,14 +58,14 @@ class AppFixtures extends Fixture
                     ->setArea($faker->numberBetween(1,300000))
                     ->setCost($faker->randomNumber(6, false))
                     ->setEnvironment($faker->word())
-                    // ->setHousing($randomLevel)
+                    ->setHousing($randomLevel)
                     ->setLanguage($faker->word())
-                    // ->setInternet($randomLevel)
+                    ->setInternet($randomLevel)
                     ->setDemography($faker->numberBetween(1, 40000000))
-                    // ->setElectricity($randomLevel)
+                    ->setElectricity($randomLevel)
                     ->setTimezone($faker->numberBetween(-12, 12))
                     ->setTemperatureAverage($faker->numberBetween(-50, 50))
-                    // ->setSunshineRate($randomLevel)
+                    ->setSunshineRate($randomLevel)
                     ->setCreatedAt($faker->dateTime())
                     ->setCountry($randomCountry);
                     // ->setRating($faker->numberBetween(1,5));
@@ -135,7 +135,7 @@ class AppFixtures extends Fixture
             for ($i=0; $i < $randomNbReview; $i++) {
                 /** @var Review $newReview */
                 $newReview = new Review();
-                $newReview->setUser($user[mt_rand(0, count($user)-1)]);
+                $newReview->setUsername($user[mt_rand(0, count($user)-1)]);
                 $newReview->setContent($faker->realText(30, 1));
                 $newReview->setRating($faker->numberBetween(1, 5));
 

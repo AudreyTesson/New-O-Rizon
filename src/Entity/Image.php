@@ -17,11 +17,11 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images')]
-    private ?City $city = null;
-
     #[ORM\OneToOne(inversedBy: 'image', cascade: ['persist', 'remove'])]
     private ?Country $country = null;
+
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?City $city = null;
 
     // public function __construct() {
     //     $this->city = new ArrayCollection();
@@ -49,18 +49,6 @@ class Image
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(?City $city): static
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getCountry(): ?Country
     {
         return $this->country;
@@ -69,6 +57,18 @@ class Image
     public function setCountry(?Country $country): static
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }

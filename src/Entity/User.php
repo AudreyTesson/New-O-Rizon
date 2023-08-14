@@ -29,6 +29,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\ManyToMany(targetEntity: City::class, inversedBy: 'users')]
+    private Collection $city;
+
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -38,15 +41,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 64)]
     private ?string $username = null;
 
-    #[ORM\ManyToMany(targetEntity: City::class, mappedBy: 'users')]
-    private Collection $cities;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'username', targetEntity: Review::class)]
     private Collection $reviews;
 
     public function __construct()
     {
-        $this->cities = new ArrayCollection();
+        $this->city = new ArrayCollection();
         $this->reviews = new ArrayCollection();
     }
 
@@ -120,6 +120,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return Collection<int, City>
+     */
+    public function getCity(): Collection
+    {
+        return $this->city;
+    }
+
+    public function addCity(City $city): static
+    {
+        if (!$this->city->contains($city)) {
+            $this->city->add($city);
+        }
+
+        return $this;
+    }
+
+    public function removeCity(City $city): static
+    {
+        $this->city->removeElement($city);
+
+        return $this;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -157,33 +181,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, City>
-     */
-    public function getCities(): Collection
-    {
-        return $this->cities;
-    }
-
-    public function addCity(City $city): static
-    {
-        if (!$this->cities->contains($city)) {
-            $this->cities->add($city);
-            $city->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCity(City $city): static
-    {
-        if ($this->cities->removeElement($city)) {
-            $city->removeUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Review>
      */
     public function getReviews(): Collection
@@ -195,7 +192,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->reviews->contains($review)) {
             $this->reviews->add($review);
-            $review->setUser($this);
+            $review->setUsername($this);
         }
 
         return $this;
@@ -205,8 +202,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->reviews->removeElement($review)) {
             // set the owning side to null (unless already changed)
-            if ($review->getUser() === $this) {
-                $review->setUser(null);
+            if ($review->getUsername() === $this) {
+                $review->setUsername(null);
             }
         }
 

@@ -28,14 +28,15 @@ class City
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private array $electricity = [];
+    #[ORM\ManyToOne(inversedBy: 'cities')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Country $country = null;
 
-    #[ORM\Column(nullable: true)]
-    private array $sunshineRate = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $electricity = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $temperatureAverage = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $internet = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $cost = null;
@@ -46,8 +47,8 @@ class City
     #[ORM\Column(nullable: true)]
     private ?int $demography = null;
 
-    #[ORM\Column(nullable: true)]
-    private array $housing = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $housing = null;
 
     #[ORM\Column]
     private ?int $timezone = null;
@@ -55,37 +56,30 @@ class City
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $environment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cities', cascade: ['detach'])]
-    private ?Country $country = null;
-
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class, orphanRemoval: true, cascade: ['remove'])]
-    private Collection $images;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
-
-    #[ORM\Column(nullable: true)]
-    private array $internet = [];
-
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'cities')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'city')]
     private Collection $users;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class)]
+    private Collection $images;
+
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class)]
     private Collection $reviews;
 
     #[ORM\Column(nullable: true)]
     private ?int $rating = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sunshineRate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $temperatureAverage = null;
+
     public function __construct()
     {
-        $this->images = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->createdAt = new \DateTime;
         $this->reviews = new ArrayCollection();
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 
     public function getId(): ?int
@@ -141,38 +135,38 @@ class City
         return $this;
     }
 
-    public function getElectricity(): array
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getElectricity(): ?string
     {
         return $this->electricity;
     }
 
-    public function setElectricity(?array $electricity): static
+    public function setElectricity(?string $electricity): static
     {
         $this->electricity = $electricity;
 
         return $this;
     }
 
-    public function getSunshineRate(): array
+    public function getInternet(): ?string
     {
-        return $this->sunshineRate;
+        return $this->internet;
     }
 
-    public function setSunshineRate(?array $sunshineRate): static
+    public function setInternet(?string $internet): static
     {
-        $this->sunshineRate = $sunshineRate;
-
-        return $this;
-    }
-
-    public function getTemperatureAverage(): ?float
-    {
-        return $this->temperatureAverage;
-    }
-
-    public function setTemperatureAverage(?float $temperatureAverage): static
-    {
-        $this->temperatureAverage = $temperatureAverage;
+        $this->internet = $internet;
 
         return $this;
     }
@@ -213,12 +207,12 @@ class City
         return $this;
     }
 
-    public function getHousing(): array
+    public function getHousing(): ?string
     {
         return $this->housing;
     }
 
-    public function setHousing(?array $housing): static
+    public function setHousing(?string $housing): static
     {
         $this->housing = $housing;
 
@@ -249,39 +243,29 @@ class City
         return $this;
     }
 
-    public function getCountry(): ?Country
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
     {
-        return $this->country;
+        return $this->users;
     }
 
-    public function setCountry(?Country $country): static
+    public function addUser(User $user): static
     {
-        $this->country = $country;
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addCity($this);
+        }
 
         return $this;
     }
 
-    
-    public function getPicture(): ?string
+    public function removeUser(User $user): static
     {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): static
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getInternet(): array
-    {
-        return $this->internet;
-    }
-
-    public function setInternet(?array $internet): static
-    {
-        $this->internet = $internet;
+        if ($this->users->removeElement($user)) {
+            $user->removeCity($this);
+        }
 
         return $this;
     }
@@ -312,30 +296,6 @@ class City
                 $image->setCity(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): static
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        $this->users->removeElement($user);
 
         return $this;
     }
@@ -381,4 +341,29 @@ class City
 
         return $this;
     }
+
+    public function getSunshineRate(): ?string
+    {
+        return $this->sunshineRate;
+    }
+
+    public function setSunshineRate(?string $sunshineRate): static
+    {
+        $this->sunshineRate = $sunshineRate;
+
+        return $this;
+    }
+
+    public function getTemperatureAverage(): ?float
+    {
+        return $this->temperatureAverage;
+    }
+
+    public function setTemperatureAverage(?float $temperatureAverage): static
+    {
+        $this->temperatureAverage = $temperatureAverage;
+
+        return $this;
+    }
+
 }

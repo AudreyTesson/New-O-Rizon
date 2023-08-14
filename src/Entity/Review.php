@@ -23,18 +23,17 @@ class Review
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reviews', cascade: ['persist'])]
+    private ?User $username = null;
+
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     #[ORM\JoinColumn(nullable: false)]
     private ?City $city = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reviews', cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     public function __construct()
     {
         $this->created_at = new \DateTime();
-        $this->user = new User();
+        // $this->user = new User();
     }
 
     public function getId(): ?int
@@ -78,6 +77,23 @@ class Review
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->id;
+    }
+
+    public function getUsername(): ?User
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?User $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
     public function getCity(): ?City
     {
         return $this->city;
@@ -88,22 +104,5 @@ class Review
         $this->city = $city;
 
         return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->id;
     }
 }
