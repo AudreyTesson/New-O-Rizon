@@ -5,16 +5,16 @@
 {% block body %}
 
 {% set route = app.request.attributes.get("_route") %}
-{# {% set isAsc = app.request.requestUri ends with ('/cities/asc') %}
-{% set isDesc = app.request.requestUri ends with ('/cities/desc') %} #}
-{# {% if route == "cities_list" or isAsc or isDesc %}
+{% set isAsc = app.request.requestUri ends with ('/cities/asc') %}
+{% set isDesc = app.request.requestUri ends with ('/cities/desc') %}
+{% if route == "cities_list" or isAsc or isDesc %}
     {% include 'partials/_sort.html.twig' %}
-{% endif %} #}
+{% endif %}
 
-{# {% include 'partials/_filter_button.html.twig'%} #}
+{% include 'partials/_filter_button.html.twig'%}
 
-{# {% set isSorted = (app.request.attributes.get("_route") ends with "sort_asc")%}
-{% set isFavorites = (app.request.attributes.get("_route") ends with "favorites")%} #}
+{% set isSorted = (app.request.attributes.get("_route") ends with "sort_asc")%}
+{% set isFavorites = (app.request.attributes.get("_route") ends with "favorites")%}
 {% set isCitiesList = (app.request.attributes.get("_route") ends with "cities_list") %}
 
     {% if citiesCountry is defined %}
@@ -95,7 +95,7 @@
             <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
             
                 {% for city in cities %}
-{# 
+
                     {% if isSorted %}
 
                         {% if sortOption == 'asc' %}
@@ -104,14 +104,14 @@
 
                         {% include 'partials/_cities_list.html.twig' %}
 
-                    {% else %} #}
+                    {% else %}
 
                         {% include 'partials/_cities_list.html.twig' %}
 
-                    {# {% endif %} #}
+                    {% endif %}
 
                 {% endfor %}
- 
+
             </div>
 
         </div>
@@ -120,11 +120,8 @@
         {{ knp_pagination_render(cities) }}
         </div>
 
-        
-       
-
     {% endif %}
 
-    {# {% include "partials/_filter_menu.html.twig" %} #}
+    {% include "partials/_filter_menu.html.twig" %}
 
 {% endblock %}

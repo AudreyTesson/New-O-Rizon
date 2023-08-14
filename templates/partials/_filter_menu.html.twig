@@ -1,0 +1,313 @@
+<aside id="filter_sidebar" class="fixed z-40 top-0 bg-white w-full h-full md:w-1/2 md:h-full lg:w-1/3 lg:h-full md:pl-4 shadow-2xl overflow-auto hidden">
+    
+        <div class="h-16 text-white border border-b-0 border-gray-200 bg-cyan-900 rounded-t-xl sticky top-0.5">
+            <span class="flex justify-between pt-4 pr-6"><h5 class="text-white font-medium text-xl pl-10">Filtre</h2>
+                <button class="close_filter text-white font-medium" aria-label="Fermer" type="button">X</button>
+            </span>
+        </div>
+        
+                {# country search #}
+                <div id="accordion-collapse" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-earth-americas fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Recherche par pays</span>
+                                
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white">
+                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black border-2 border-slate-400 font-medium rounded-lg text-base px-4 py-2.5 text-center inline-flex items-center" type="button">Sélectionnez un pays 
+                                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg border-slate-400 shadow w-44"> 
+                                <ul class="py-2 text-base text-black" aria-labelledby="dropdownDefaultButton">
+                                {% for city in cities|sort((a, b) => a.countryName > b.countryName) %}
+                                    <li>
+                                        <a href="{{ path('app_front_cities_country', {'id': city.countryId})}}" class="block px-4 py-2 hover:bg-gray-100">{{ city.countryName }}</a>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>     
+                    {# electricity row form #}
+                    <h2 id="accordion-collapse-heading-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-2" aria-expanded="true" aria-controls="accordion-collapse-body-2">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-bolt fa-xl fa-center" style="color: #000000;"></i>
+                                <span class="font-bold">Qualité du réseau électrique</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    {{ form_start(formFilter, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white">
+                            {{ form_row(formFilter.electricityLevel) }}
+                        </div>
+                    </div>
+                    {# Internet row form    #}
+                    <h2 id="accordion-collapse-heading-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-3" aria-expanded="true" aria-controls="accordion-collapse-body-3">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-wifi fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Qualité du réseau Internet</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            {{ form_row(formFilter.internetLevel) }}
+                        </div>
+                    </div>
+                    {# sunshine_average row form #}
+                    <h2 id="accordion-collapse-heading-4">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-4" aria-expanded="true" aria-controls="accordion-collapse-body-4">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-regular fa-sun fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Taux d'ensoleillement</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4" class="hidden" aria-labelledby="accordion-collapse-heading-4">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white">        
+                            {{ form_row(formFilter.sunshineLevel) }}
+                        </div>
+                    </div>
+                    {# housing row form #}
+                    <h2 id="accordion-collapse-heading-5">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-5" aria-expanded="true" aria-controls="accordion-collapse-body-5">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-house fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Niveau de logement</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5" class="hidden" aria-labelledby="accordion-collapse-heading-5">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white">        
+                            {{ form_row(formFilter.housingLevel) }}
+                        </div>
+                    </div>
+                    {# temperature row form #}
+                    <h2 id="accordion-collapse-heading-6">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-6" aria-expanded="true" aria-controls="accordion-collapse-body-6">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-temperature-half fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Température Moyenne</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-6" class="hidden" aria-labelledby="accordion-collapse-heading-6">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            <div class="flex flex-nowrap justify-between">
+                            {{ form_row(formFilter.temperatureMin) }}
+                            {{ form_row(formFilter.temperatureMax) }}
+                            </div>
+                            <div id='temperature-slider'></div>
+                        </div>
+                    </div>
+                    {# demography min row form #}
+                    <h2 id="accordion-collapse-heading-7">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-7" aria-expanded="true" aria-controls="accordion-collapse-body-7">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-people-group fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Population (en nombre d'habitants)</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-7" class="hidden" aria-labelledby="accordion-collapse-heading-7">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            <div class="flex flex-nowrap justify-between">  
+                                {{ form_row(formFilter.demographyMin) }}
+                                {{ form_row(formFilter.demographyMax) }}
+                            </div>
+                            <div id='demography-slider'></div>
+                        </div>
+                    </div>
+                    {# cost row form #}
+                    <h2 id="accordion-collapse-heading-8">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-8" aria-expanded="true" aria-controls="accordion-collapse-body-8">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-sack-dollar fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Coût de la vie</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-8" class="hidden" aria-labelledby="accordion-collapse-heading-8">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            <div class="flex flex-nowrap justify-between">
+                                {{ form_row(formFilter.costMin) }}
+                                {{ form_row(formFilter.costMax) }}
+                            </div>
+                            <div id='cost-slider'></div>
+                        </div>
+                    </div>
+                    {# area row form #}
+                    <h2 id="accordion-collapse-heading-9">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-9" aria-expanded="true" aria-controls="accordion-collapse-body-9">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-ruler fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Superficie (en km<sup>2</sup>)</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-9" class="hidden" aria-labelledby="accordion-collapse-heading-9">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            <div class="flex flex-nowrap justify-between">
+                                {{ form_row(formFilter.areaMin) }}
+                                {{ form_row(formFilter.areaMax) }}
+                            </div>
+                            <div id='area-slider'></div>
+                        </div>
+                    </div>
+                    {# Currency row form #}
+                    <h2 id="accordion-collapse-heading-10">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-10" aria-expanded="true" aria-controls="accordion-collapse-body-10">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-brands fa-bitcoin fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Devise</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-10" class="hidden" aria-labelledby="accordion-collapse-heading-10">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            {{ form_row(formFilter.currencyType) }}
+                        </div>
+                    </div>
+                    {# Timezone row form #}
+                    <h2 id="accordion-collapse-heading-11">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-11" aria-expanded="true" aria-controls="accordion-collapse-body-11">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-regular fa-clock fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Fuseau Horaire GMT</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-11" class="hidden" aria-labelledby="accordion-collapse-heading-11">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            {# {{ form_row(form.timezone) }} #}
+                            <div class="flex flex-nowrap justify-center">
+                                {{ form_row(formFilter.timezone) }}
+                            </div>
+                            <div id='timezone-slider'></div>
+                        </div>
+                    </div>
+                    {# language row form #}
+                    <h2 id="accordion-collapse-heading-12">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-12" aria-expanded="true" aria-controls="accordion-collapse-body-12">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-language fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Langues</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-12" class="hidden" aria-labelledby="accordion-collapse-heading-12">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            {{ form_row(formFilter.language) }}
+                        </div>
+                    </div>
+                    {# visa row form #}
+                    <h2 id="accordion-collapse-heading-13">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-13" aria-expanded="true" aria-controls="accordion-collapse-body-13">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-solid fa-passport fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Visa</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-13" class="hidden" aria-labelledby="accordion-collapse-heading-13">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            {{ form_row(formFilter.visaType) }}
+                            {{ form_row(formFilter.visaRequired) }}
+                        </div>
+                    </div>     
+                    {# environment row form #}
+                    <h2 id="accordion-collapse-heading-14">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-gray-100" data-accordion-target="#accordion-collapse-body-14" aria-expanded="true" aria-controls="accordion-collapse-body-14">
+                            <div class="flex space-x-2 text-gray-800">
+                                <i class="fa-regular fa-image fa-xl" style="color: #000000;"></i>
+                                <span class="font-bold">Environnement</span>
+                            </div>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-14" class="hidden" aria-labelledby="accordion-collapse-heading-14">
+                        <div class="p-5 border border-b-0 border-gray-200 bg-white"> 
+                            {{ form_row(formFilter.environment) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap md:flex-nowrap gap-3 justify-center pb-2 text-gray-500 border border-b-0 border-gray-200 bg-gray-100 rounded-b-xl sticky bottom-0 pt-3">
+
+                {# {% set isFiltered = app.request.requestUri | urlContains('filter_data') %} #}
+                {% set isFiltered = app.request.requestUri matches '/filter_data/' %}
+
+                {% if isFiltered %}
+                
+                    <div class="w-fit ">
+                        <button id="reset_btn" type="submit" value="Submit" class="w-full hover:bg-sky-600 hover:text-white focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-cyan-900 bg-white border-2">Effacer</button>
+                    </div> 
+
+                {% else %}
+                    
+                    <div class="w-fit ">
+                        <button type="reset" value="Reset" class="w-full hover:bg-sky-600 hover:text-white focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-cyan-900 bg-white border-2">Effacer</button>
+                    </div> 
+
+                {% endif %}
+
+                    <div class="w-fit">
+                        <button type ="submit" value="Submit" class="w-full hover:bg-sky-600 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-cyan-900">Valider</button>
+                    </div>
+
+                </div>
+               
+            {{ form_end(formFilter) }}
+    
+</aside>

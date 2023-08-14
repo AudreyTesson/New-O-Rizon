@@ -20,13 +20,24 @@
 
         {% include 'partials/_nav.html.twig' %}
 
+        {% include "partials/_flash.html.twig" %}
+
 <main>
         {% block body %}{% endblock %}
 </main>
         {% include "partials/_footer.html.twig" %}
         
-        <script src="https://kit.fontawesome.com/de8da1408a.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
+        {# <script src="https://kit.fontawesome.com/de8da1408a.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script> #}
+
+                {# Back to top button #}
+        {% set route = app.request.get('_route') %}
+        {% if route == 'cities_list' or route == 'cities_detail' or route == 'sort_asc' or route == 'sort_desc' or route == 'cities_country' or route == "favorites" %}
+        <button id="to-top-button" title="Go To Top" class="hidden md:hidden fixed z-40 bottom-8 right-5 border-0 w-10 h-10 drop-shadow-md bg-cyan-900 text-white text-4xl font-bold">&uarr;</button>
+        {% endif %}
+        
+
+        {% include "partials/_scripts.html.twig" %}
 
     </body>
 </html>

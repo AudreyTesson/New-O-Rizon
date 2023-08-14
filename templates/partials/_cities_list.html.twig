@@ -1,16 +1,16 @@
 {% set isCitiesCountry = (app.request.attributes.get("_route") ends with "country") %}
 {% set isCitiesList = app.request.requestUri ends with "/cities" %}
-{# {% set isCitiesListPaginate = app.request.requestUri | urlContains("/cities?page") %} #}
+{% set isCitiesListPaginate = app.request.requestUri matches '/cities?page' %}
 {% set isSortedASC = app.request.requestUri ends with "/cities/asc" %}
 {% set isSortedDESC = app.request.requestUri ends with "/cities/desc" %}
-{# {% set isCitiesFiltered = app.request.requestUri | urlContains('filter_data') %} #}
+{% set isCitiesFiltered = app.request.requestUri matches 'filter_data' %}
 {% set isCitiesSearch = (app.request.attributes.get("_route") ends with "search") %}
 
-{# {% if isCitiesCountry %}
+{% if isCitiesCountry %}
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <a href="{{ path('cities_detail', {'id': city.id}) }}">
+        <a href="{{ path('app_front_cities_detail', {'id': city.id}) }}">
             <div class="w-full h-96 relative overflow-hidden">
                 <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
                 style="background-image:url('{{ city.country.image.url }}')">
@@ -28,7 +28,7 @@
                 {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %}
                 </div>
             </div>
-        </a> #}
+        </a>
 
 {% if isCitiesList %}
 
@@ -60,7 +60,7 @@
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <a href="{{ path('cities_detail', {'id': city.id}) }}">
+        <a href="{{ path('app_front_cities_detail', {'id': city.id}) }}">
             <div class="w-full h-96 relative overflow-hidden">
                 {# ! retrieve 1 image by country by city with dql request  #}
                 <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
@@ -71,7 +71,7 @@
                         {{ city.name }}</h2>
                     <h2 class="p-2 text-2xl font-bold w-fit">
                         {{ city.country.name}}</h2>
-                    {# {% include "/partials/_favorites.html.twig" %} #}
+                    {% include "/partials/_favorites.html.twig" %}
                 </span>
 
                 {# stars rating #}
@@ -86,7 +86,7 @@
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <a href="{{ path('cities_detail', {'id': city.cityId}) }}">
+        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
             <div class="w-full h-96 relative overflow-hidden">
                 <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
                 style="background-image:url('{{ city.imageUrl }}')">
@@ -96,7 +96,7 @@
                         {{ city.cityName }}</h2>
                     <h2 class="p-2 text-2xl font-bold w-fit">
                         {{ city.countryName}}</h2>
-                    {# {% include "/partials/_favorites.html.twig" %} #}
+                    {% include "/partials/_favorites.html.twig" %}
                 </span>
 
                 {# stars rating #}
@@ -111,7 +111,7 @@
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <a href="{{ path('cities_detail', {'id': city.cityId}) }}">
+        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
             <div class="w-full h-96 relative overflow-hidden">
                 <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
                 style="background-image:url('{{ city.imageUrl }}')">
@@ -121,7 +121,7 @@
                         {{ city.cityName }}</h2>
                     <h2 class="p-2 text-2xl font-bold w-fit">
                         {{ city.countryName}}</h2>
-                    {# {% include "/partials/_favorites.html.twig" %} #}
+                    {% include "/partials/_favorites.html.twig" %}
                 </span>
 
                 {# stars rating #}
@@ -136,7 +136,7 @@
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <a href="{{ path('cities_detail', {'id': city.cityId}) }}">
+        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
             <div class="w-full h-96 relative overflow-hidden">
                 <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
                 style="background-image:url('{{ city.imageUrl }}')">
@@ -146,7 +146,7 @@
                         {{ city.cityName }}</h2>
                     <h2 class="p-2 text-2xl font-bold w-fit">
                         {{ city.countryName}}</h2>
-                    {# {% include "/partials/_favorites.html.twig" %} #}
+                    {% include "/partials/_favorites.html.twig" %}
                 </span>
 
                 {# stars rating #}
@@ -161,7 +161,7 @@
 
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <a href="{{ path('cities_detail', {'id': city.cityId}) }}">
+        <a href="{{ path('app_front_cities_detail', {'id': city.cityId}) }}">
             <div class="w-full h-96 relative overflow-hidden">
                 <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
                 style="background-image:url('{{ city.imageUrl }}')">
@@ -171,7 +171,7 @@
                         {{ city.cityName }}</h2>
                     <h2 class="p-2 text-2xl font-bold w-fit">
                         {{ city.countryName}}</h2>
-                    {# {% include "/partials/_favorites.html.twig" %} #}
+                    {% include "/partials/_favorites.html.twig" %}
                 </span>
 
                 {# stars rating #}

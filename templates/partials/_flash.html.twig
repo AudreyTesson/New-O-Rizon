@@ -1,0 +1,31 @@
+
+<div role="dialog" aria-labelledby="Message d'alerte pour l'ajout d'un élément en favoris ou une connexion utilisateur" aria-describedby="Boite de dialogue contenant un texte de confirmation d'une action" id="modal" class="modal flex justify-center">
+ {% for message in app.flashes("success") %}
+    <div class="relative flex flex-wrap p-4 mx-4 justify-center w-full lg:w-1/2 text-md text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        <div>
+            <span class="font-medium">{{ message }}</span> 
+            <button id="close_modal" type="button" class="close_modal absolute top-1 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 text-sm p-1 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+            X
+            <span class="sr-only">Fermeture du message</span>
+        </button>
+        </div>
+        
+    </div>
+{% endfor %}
+</div>
+
+
+ <div role="dialog" aria-labelledby="Message d'alerte pour l'ajout d'un élément en favoris ou une connexion utilisateur" aria-describedby="Boite de dialogue contenant un texte de confirmation d'une action" id="modal" class="modal flex justify-center">
+ {% for message in app.flashes("danger") %}
+    <div class="relative flex flex-wrap p-4 mx-4 justify-center w-full lg:w-1/2 text-md text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <div>
+            <span class="font-medium">{{ message }}</span> 
+            <button id="close_modal" type="button" class="close_modal absolute top-1 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 text-sm p-1 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+            X
+            <span class="sr-only">Fermeture du message</span>
+        </button>
+        </div>
+        
+    </div>
+{% endfor %}
+</div>

@@ -2,6 +2,8 @@
 
 namespace App\Controller\Front;
 
+use App\Data\FilterData;
+use App\Form\FilterDataType;
 use App\Repository\CityRepository;
 use App\Repository\ReviewRepository;
 use App\Service\CallApiService;
@@ -27,18 +29,34 @@ class CityController extends AbstractController
         CityRepository $cityRepository,
         Request $request,
         PaginatorInterface $paginator,
-        CallApiService $callApiService
+        // CallApiService $callApiService
     ): Response
     {
-        $response = $this->client->request(
-            'GET',
-            'https://api.unsplash.com/'
-        );
+        // $response = $this->client->request(
+        //     'GET',
+        //     'https://api.unsplash.com/'
+        // );
         $cities = $paginator->paginate(
             $cityRepository->findCountryAndImageByCity(),
             $request->query->getInt('page', 1),
             9
         );
+
+        $criteria = new FilterData();
+        $formFilter = $this->createForm(FilterDataType::class, $criteria);
+        $formFilter->handleRequest($request);
+
+        if ($formFilter->isSubmitted() && $formFilter->isValid()) {
+            
+            $citiesFilter = $cityRepository->findByFilter($criteria);
+            $citiesFilter = $paginator->paginate($citiesFilter, $request->query->getInt('page', 1),6);
+
+            return $this->render('front/cities/list.html.twig', [
+                "citiesFilter" => $citiesFilter, 
+                "cities" => $cities, 
+                "formFilter" => $formFilter->createView(),
+            ]);
+        }
 
         return $this->render('front/city/index.html.twig', [
             'cities' => $cities,

@@ -1,0 +1,32 @@
+<div class="relative inline-block text-left left-4 top-4">
+
+    <div>
+        <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+        Tri
+            <i class="fa-solid fa-sort fa-lg mt-2"></i>
+        </button>
+    </div>
+
+    <div id="dropdownMenu" class="hidden absolute left-2 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+        <div class="py-1" role="none">
+            <span class="font-semibold text-gray-700 block px-4 py-2 text-sm" id="close-button" role="menuitem" tabindex="-1" id="menu-item-0">
+                Tri par
+                <i class="fa-solid fa-xmark fa-lg float-right pt-3"></i>
+            </span>
+        </div>
+        <div class="py-1" role="none">
+            <a href="{{ path('sort_asc') }}"  class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
+                <i class="fa-solid fa-arrow-up-a-z fa-lg"></i>
+                A - Z</a>
+            <a href="{{ path('sort_desc') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">
+                <i class="fa-solid fa-arrow-down-z-a fa-lg"></i>
+            Z - A</a>
+        </div>
+        <div class="py-1" role="none">
+            <a href="{{ path('cities_list') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">
+                <i class="fa-solid fa-rotate-left fa-lg"></i>
+            Reset</a>
+        </div>
+    </div>
+
+</div>
