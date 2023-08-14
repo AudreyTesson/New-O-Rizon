@@ -1,0 +1,32 @@
+{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+
+    {% set cityFavIds = app.user.getCity|map(item => item.id) %}
+    {% set cityId = city.cityId ?? city.id %}
+    {% set pathAddFav = path('app_front_favorites_add', {'id': cityId}) %}
+    {% set pathDeleteFav = path('app_front_favorites_remove', {'id': cityId}) %}
+
+    <a href="{{ pathAddFav }}" 
+
+        {% if cityId in cityFavIds %} 
+            style="display: none;"
+        {% endif %}>
+
+        <i class="fa-regular fa-heart fa-xl absolute right-4 top-6 text-xl text-white font-bold"></i>
+    </a>
+
+    <a href="{{ pathDeleteFav }}" 
+
+        {% if cityId not in cityFavIds %} 
+            style="display: none;"
+        {% endif %}>
+        
+        <i class="fa-solid fa-heart fa-xl absolute right-4 top-6 text-xl text-white font-bold" style="color: #e80225;"></i>
+    </a>
+
+{% else %}
+
+    <a href="{{ path('app_login') }}">
+        <i class="fa-regular fa-heart fa-xl absolute right-4 top-6 text-xl text-white font-bold"></i>
+    </a>
+
+{% endif %}

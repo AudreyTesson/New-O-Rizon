@@ -11,6 +11,17 @@
             <h2 class="text-2xl mb-2 font-bold w-fit">
                 {{ city.country.name}}</h2>
         </span>
+                {# stars rating #}
+        <div class="absolute left-2 md:left-0 top-2"> 
+            <div class="flex flex-nowrap items-center justify-center w-18 md:w-48 h-8 drop-shadow-lg">
+
+            <div>
+                {% set ratingStars = city.rating|round(0, 'floor') %}
+                {% include 'partials/_stars.html.twig' with { ratingStars: ratingStars } %}
+            </div>
+
+            </div>
+        </div>
     </div>
 
     <div class="w-full grid lg:grid-cols-5 lg:justify-center lg:items-center lg:px-6 lg:py-9 gap-4">

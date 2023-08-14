@@ -22,9 +22,9 @@
                     <li>
                         <a href="{{ path('app_front_cities_list') }}" class="text-white hover:border-4 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-white md:p-0 md:hidden">Liste des villes</a>
                     </li>
-                    {# <li>
-                        <a href="{{ path('favorites') }}" class="text-white hover:border-4 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-white md:p-0 md:hidden">Mes favoris</a>
-                    </li> #}
+                    <li>
+                        <a href="{{ path('app_front_favorites') }}" class="text-white hover:border-4 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-white md:p-0 md:hidden">Mes favoris</a>
+                    </li>
                     <li>
                         <a href="{{ path('app_front_about_us') }}" class="text-white hover:border-4 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-white md:p-0 md:hidden">Qui sommes-nous ?</a>
                     </li>
@@ -46,9 +46,9 @@
                             <li>
                                 <a href="{{ path('app_front_user_show', {'id': user.id}) }}" class="text-md hover:bg-gray-100 text-gray-700 block px-4 py-2">{{ user.firstname }} {{ user.lastname }}</a>
                             </li>
-                            {# <li class="hidden md:block">
-                                <a href="{{ path('favorites') }}" class="text-md hover:bg-gray-100 text-gray-700 block px-4 py-2">Mes favoris</a>
-                            </li> #}
+                            <li class="hidden md:block">
+                                <a href="{{ path('app_front_favorites') }}" class="text-md hover:bg-gray-100 text-gray-700 block px-4 py-2">Mes favoris</a>
+                            </li>
                             {% if is_granted("ROLE_ADMIN") %}
                             <li>
                                 <a class="text-md hover:bg-gray-100 text-gray-700 block px-4 py-2" href="{{ path('admin')}} ">Back-Office</a>

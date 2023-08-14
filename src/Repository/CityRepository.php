@@ -44,7 +44,7 @@ class CityRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $dql = "
-        SELECT c.id AS id, i.id AS imageId, i.url AS imageUrl, c.name AS name, c.area AS cityArea, c.createdAt AS cityCreatedAt, c.updatedAt AS cityUpdatedAt, c.electricity AS cityElectricity, c.internet AS cityInternet, c.sunshineRate AS citySunshineRate, c.temperatureAverage AS cityTemperatureAverage, c.cost AS cityCost, c.language AS cityLanguage, c.demography AS cityDemography, c.housing AS cityHousing, c.timezone AS cityTimezone, c.environment AS cityEnvironment, co.name AS countryName, co.id AS countryId
+        SELECT c.id AS id, i.id AS imageId, i.url AS imageUrl, c.name AS name, c.rating AS cityRating, c.area AS cityArea, c.createdAt AS cityCreatedAt, c.updatedAt AS cityUpdatedAt, c.electricity AS cityElectricity, c.internet AS cityInternet, c.sunshineRate AS citySunshineRate, c.temperatureAverage AS cityTemperatureAverage, c.cost AS cityCost, c.language AS cityLanguage, c.demography AS cityDemography, c.housing AS cityHousing, c.timezone AS cityTimezone, c.environment AS cityEnvironment, co.name AS countryName, co.id AS countryId
         FROM App\Entity\City c
         JOIN App\Entity\Image i WITH i.city = c
         JOIN App\Entity\Country co WITH c.country = co

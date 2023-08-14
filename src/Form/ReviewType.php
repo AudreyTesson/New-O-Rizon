@@ -19,7 +19,7 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', EntityType::class, [
+            ->add('username', EntityType::class, [
                 // "label" => "email",
                 "multiple" => true,
                 // "expanded" => false,

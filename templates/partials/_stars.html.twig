@@ -1,0 +1,33 @@
+<div class="d-flex" style="color: orange;">
+
+{% if app.request.attributes.get('_route') == "cities_detail" %}
+
+    {% for i in 0..4 %}
+    
+        {% if ratingStars >= i + 1 %}
+            <i class="fa-solid fa-star drop-shadow-lg fa-md" style="color: #e4a11b;"></i>
+        {% elseif ratingStars >= i + 0.5 %}
+            <i class="fa-regular fa-star-half-stroke drop-shadow-md fa-md" style="color: #e4a11b;"></i>
+        {% else %}
+            <i class="fa-regular fa-star drop-shadow-lg fa-md" style="color: #e4a11b;"></i>
+        {% endif %}
+
+    {% endfor %}
+
+{% else %}
+
+    {% for i in 0..4 %}
+    
+        {% if ratingStars >= i + 1 %}
+            <i class="fa-solid fa-star drop-shadow-lg fa-lg" style="color: #e4a11b;"></i>
+        {% elseif ratingStars >= i + 0.5 %}
+            <i class="fa-regular fa-star-half-stroke drop-shadow-lg fa-lg" style="color: #e4a11b;"></i>
+        {% else %}
+            <i class="fa-regular fa-star drop-shadow-lg fa-lg" style="color: #e4a11b;"></i>
+        {% endif %}
+
+    {% endfor %}
+
+{% endif %}
+
+</div>

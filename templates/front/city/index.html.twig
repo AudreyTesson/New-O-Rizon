@@ -1,34 +1,130 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CityController!{% endblock %}
+{% block title %}New O'rizon Liste des villes{% endblock %}
 
 {% block body %}
-    <div class="flex w-full justify-center">
-        <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
 
-            {% for city in cities %}
-                <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+{% set route = app.request.attributes.get("_route") %}
+{# {% set isAsc = app.request.requestUri ends with ('/cities/asc') %}
+{% set isDesc = app.request.requestUri ends with ('/cities/desc') %} #}
+{# {% if route == "cities_list" or isAsc or isDesc %}
+    {% include 'partials/_sort.html.twig' %}
+{% endif %} #}
 
-                    <a href="{{ path('app_front_cities_detail', {'id': city.id}) }}">
-                        <div class="w-full h-96 relative overflow-hidden">
-                            <div class="w-full h-full absolute transition-transform duration-300 hover:scale-105"
-                            style="background-image:url('{{ city.imageUrl }}')">
-                            </div>
-                            <span class="text-xl text-white font-bold w-auto flex flex-col justify-center items-center backdrop-brightness-75">
-                                <h2 class="p-2 text-2xl font-bold w-fit">
-                                    {{ city.name }}</h2>
-                                <h2 class="p-2 text-2xl font-bold w-fit">
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+{# {% include 'partials/_filter_button.html.twig'%} #}
+
+{# {% set isSorted = (app.request.attributes.get("_route") ends with "sort_asc")%}
+{% set isFavorites = (app.request.attributes.get("_route") ends with "favorites")%} #}
+{% set isCitiesList = (app.request.attributes.get("_route") ends with "cities_list") %}
+
+    {% if citiesCountry is defined %}
+        <div class="flex w-full justify-center">
+            <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
+                
+                {% for city in citiesCountry %}
+
+                    {% if isSorted %}
+
+                        {% if sortOption == 'ASC' %}
+                            
+                        {% else %}
+                            
+                        {% endif %}
+
+                        {% include 'partials/_cities_list.html.twig' %}
+
+                    {% else %}
+
+                        {% include 'partials/_cities_list.html.twig' %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
         </div>
 
-    </div>
+        <div class="pagination flex justify-center mb-5">
+            {{ knp_pagination_render(citiesCountry) }}
+        </div>
+
+    {% elseif citiesFilter is defined %}
+        <div class="flex w-full justify-center">
+            <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
+            
+                {% for city in citiesFilter %}
+
+                    {% if isSorted %}
+
+                        {% if sortOption == 'ASC' %}
+                            
+                        {% else %}
+                            
+                        {% endif %}
+
+                        {% include 'partials/_cities_list.html.twig' %}
+
+                    {% else %}
+
+                        {% include 'partials/_cities_list.html.twig' %}
+
+                    {% endif %}
+
+                {% else %}
+
+                <div>
+                    <div>
+                        <em><p><span class="ps-1">Nous n'avons pas trouvé de ville correspondant à votre recherche. Tentez à nouveau votre chance !<p></span></em>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
 
         <div class="pagination flex justify-center mb-5">
-    {{ knp_pagination_render(cities) }}
-    {# {{ knp_pagination_sortable(cities, 'Title A-Z', 'a.title', {}, {'direction': 'asc'}) }} #}
-</div>
+            {{ knp_pagination_render(citiesFilter) }}
+        </div>
+
+    {% else %}
+            
+        <div class="flex w-full justify-center">
+            <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
+            
+                {% for city in cities %}
+{# 
+                    {% if isSorted %}
+
+                        {% if sortOption == 'asc' %}
+                        {% else %}
+                        {% endif %}
+
+                        {% include 'partials/_cities_list.html.twig' %}
+
+                    {% else %} #}
+
+                        {% include 'partials/_cities_list.html.twig' %}
+
+                    {# {% endif %} #}
+
+                {% endfor %}
+ 
+            </div>
+
+        </div>
+
+        <div class="z-50 pagination flex justify-center mb-5">
+        {{ knp_pagination_render(cities) }}
+        </div>
+
+        
+       
+
+    {% endif %}
+
+    {# {% include "partials/_filter_menu.html.twig" %} #}
+
 {% endblock %}
