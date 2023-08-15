@@ -50,6 +50,7 @@ class CityCrudController extends AbstractCrudController
 
         yield AssociationField::new('country', 'Pays')
             ->autocomplete();
+            
         yield TextField::new('language', 'Langue');   
 
         yield NumberField::new('demography', 'Démographie')
@@ -62,12 +63,12 @@ class CityCrudController extends AbstractCrudController
 
         yield DateTimeField::new('updated_at', 'Modifié le')->hideOnForm();
 
-        $levels= [
-            'Non renseigné' => '',
-            'Bas' => 'Low',
-            'Moyen' => 'Medium',
-            'Haut' => 'High',
-        ];
+        // $levels= [
+        //     'Non renseigné' => '',
+        //     'Bas' => 'Low',
+        //     'Moyen' => 'Medium',
+        //     'Haut' => 'High',
+        // ];
 
         // yield ChoiceField::new('electricity', 'Electricité')
         //     ->setRequired(false)

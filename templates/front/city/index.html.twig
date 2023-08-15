@@ -22,23 +22,7 @@
             <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
                 
                 {% for city in citiesCountry %}
-
-                    {% if isSorted %}
-
-                        {% if sortOption == 'ASC' %}
-                            
-                        {% else %}
-                            
-                        {% endif %}
-
-                        {% include 'partials/_cities_list.html.twig' %}
-
-                    {% else %}
-
-                        {% include 'partials/_cities_list.html.twig' %}
-
-                    {% endif %}
-
+                    {% include 'partials/_cities_list.html.twig' %}
                 {% endfor %}
 
             </div>
@@ -54,23 +38,7 @@
             <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
             
                 {% for city in citiesFilter %}
-
-                    {% if isSorted %}
-
-                        {# {% if sortOption == 'ASC' %}
-                            
-                        {% else %}
-                            
-                        {% endif %} #}
-
-                        {% include 'partials/_cities_list.html.twig' %}
-
-                    {% else %}
-
-                        {% include 'partials/_cities_list.html.twig' %}
-
-                    {% endif %}
-
+                    {% include 'partials/_cities_list.html.twig' %}
                 {% else %}
 
                 <div>
@@ -95,21 +63,7 @@
             <div class="w-screen md:grid md:grid-cols-3 md:justify-center md:items-center my-4 mx-4 lg:mx-10 p-4 gap-x-2 gap-y-4">
             
                 {% for city in cities %}
-
-                    {% if isSorted %}
-
-                        {# {% if sortOption == 'asc' %}
-                        {% else %}
-                        {% endif %} #}
-
-                        {% include 'partials/_cities_list.html.twig' %}
-
-                    {% else %}
-
-                        {% include 'partials/_cities_list.html.twig' %}
-
-                    {% endif %}
-
+                    {% include 'partials/_cities_list.html.twig' %}
                 {% endfor %}
 
             </div>

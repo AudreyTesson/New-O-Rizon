@@ -28,7 +28,7 @@ class City
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cities')]
+    #[ORM\ManyToOne(inversedBy: 'cities', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Country $country = null;
 
@@ -59,10 +59,10 @@ class City
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'city')]
     private Collection $users;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Image::class, cascade: ['remove'])]
     private Collection $images;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class)]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Review::class, cascade: ['remove'])]
     private Collection $reviews;
 
     #[ORM\Column(nullable: true)]
@@ -364,6 +364,11 @@ class City
         $this->temperatureAverage = $temperatureAverage;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
 }

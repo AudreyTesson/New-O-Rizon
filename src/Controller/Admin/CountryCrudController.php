@@ -31,10 +31,7 @@ class CountryCrudController extends AbstractCrudController
         yield TextField::new('name');
 
         yield AssociationField::new('cities')
-            ->onlyOnIndex();
-
-        yield ArrayField::new('cities')
-            ->hideOnIndex();
+            ->autocomplete();
 
         yield BooleanField::new('visa_is_required')
             ->hideOnIndex();

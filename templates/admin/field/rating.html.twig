@@ -1,0 +1,22 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% set rating = field.value %}
+{% for i in 1..5 %}
+    {% if i <= rating %}
+        {% if rating <= 1 %}
+            <span class="fas fa-star text-danger"></span>
+        {% elseif rating <= 3 %}
+            <span class="fas fa-star text-warning"></span>
+        {% elseif rating <= 5 %}
+            <span class="fas fa-star text-success"></span>
+        {% else %}
+            <span class="fas fa-star text-info"></span>
+        {% endif %}
+    {% else %}
+        <span class="far fa-star text-warning"></span>
+    {% endif %}
+{% endfor %}
+
+
+{{ field.formattedValue}}

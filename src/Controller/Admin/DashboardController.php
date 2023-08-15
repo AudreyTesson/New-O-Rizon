@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\City;
 use App\Entity\Country;
 use App\Entity\Image;
+use App\Entity\Review;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -51,6 +52,13 @@ class DashboardController extends AbstractDashboardController
             [
             MenuItem::linkToCrud('Create User', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Users', 'fas fa-eye', User::class),
+            ]
+        );
+
+        yield MenuItem::subMenu('Reviews', 'fas fa-star')->setSubItems(
+            [
+            MenuItem::linkToCrud('Create Review', 'fas fa-plus', Review::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Reviews', 'fas fa-eye', Review::class),
             ]
         );
 
