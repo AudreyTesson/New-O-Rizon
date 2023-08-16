@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,16 +21,9 @@ class ReviewType extends AbstractType
     {
         $builder
             ->add('username', EntityType::class, [
-                // "label" => "email",
-                "multiple" => true,
-                // "expanded" => false,
                 "class" => User::class,
-                
-                // "choice_label" => "email",  
                 'choice_label' => 
-                function (User $user): string {
-    return $user->getUsername();
-}
+                'username'
             ])
             ->add('content', TextareaType::class, [
                 "label" => "Votre commentaire : ",
@@ -55,6 +49,7 @@ class ReviewType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Review::class,
+            // 'username' => null
         ]);
     }
 }

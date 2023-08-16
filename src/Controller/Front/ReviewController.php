@@ -42,7 +42,7 @@ class ReviewController extends AbstractController
             $entityManagerInterface->flush();
 
             $reviewByCity = $reviewRepository->findBy([
-                "city" => $city], ["createdAt" => "DESC"]);
+                "city" => $city], ["created_at" => "DESC"]);
             $rating = [];
             foreach ($reviewByCity as $review) {
                 $rating[] = $review->getRating();
@@ -58,7 +58,7 @@ class ReviewController extends AbstractController
             
             $entityManagerInterface->flush();    
 
-            return $this->redirectToRoute("cities_detail", [
+            return $this->redirectToRoute("app_front_cities_detail", [
                 "id" => $city->getId()]);
         }    
 
