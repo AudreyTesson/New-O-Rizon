@@ -10,9 +10,13 @@ trait ShowTrait
 {
     public function configureActions(Actions $actions): Actions
     {
-        $actions
-            ->add(Crud::PAGE_INDEX, Action::DETAIL);
         return $actions
-        ;
+            ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+        ->showEntityActionsInlined();
     }
 }

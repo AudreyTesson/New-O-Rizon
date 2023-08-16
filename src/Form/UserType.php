@@ -23,15 +23,15 @@ class UserType extends AbstractType
         $builder
             ->add('firstname', TextType::class, ['label' => 'Prénom', "attr" => ["autocomplete" => "given-name"]])
             ->add('lastname', TextType::class, ['label' => 'Nom', "attr" => ["autocomplete" => "family-name"]])
-            // ->add('username', TextType::class, ['label' => 'Pseudonyme', "attr" => ["autocomplete" => "nickname"]])
+            ->add('username', TextType::class, ['label' => 'Pseudonyme', "attr" => ["autocomplete" => "nickname"]])
             // ->add('username', EntityType::class, [
             //     'class' => User::class,
             //     'choice_label' => 'username',
             // ])
-            ->add('username', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'username',
-            ])
+            // ->add('username', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'username',
+            // ])
             ->add('email', EmailType::class, [
                 "attr" => ["placeholder" => "user@newOrizon.com", "autocomplete" => "current-email"]
             ])

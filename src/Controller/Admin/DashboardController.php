@@ -14,9 +14,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -34,33 +36,25 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToUrl('Back to the website', 'fas fa-home', '/');
 
-        yield MenuItem::subMenu('Cities', 'fas fa-bars')->setSubItems(
+        yield MenuItem::linkToDashboard('Dashboard', 'fas fa-dashboard');
+
+        yield MenuItem::subMenu('Cities', 'fas fa-building')->setSubItems(
             [
             MenuItem::linkToCrud('Create City', 'fas fa-plus', City::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Cities', 'fas fa-eye', City::class),
             ]
         );
 
-        yield MenuItem::subMenu('Countries', 'fas fa-bars')->setSubItems(
+        yield MenuItem::subMenu('Countries', 'fas fa-globe')->setSubItems(
             [
             MenuItem::linkToCrud('Create Country', 'fas fa-plus', Country::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Countries', 'fas fa-eye', Country::class),
             ]
         );
 
-        yield MenuItem::subMenu('Users', 'fas fa-user')->setSubItems(
-            [
-            MenuItem::linkToCrud('Create User', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Show Users', 'fas fa-eye', User::class),
-            ]
-        );
+        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
 
-        yield MenuItem::subMenu('Reviews', 'fas fa-star')->setSubItems(
-            [
-            MenuItem::linkToCrud('Create Review', 'fas fa-plus', Review::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Show Reviews', 'fas fa-eye', Review::class),
-            ]
-        );
+        yield MenuItem::linkToCrud('Reviews', 'fas fa-star', Review::class);
 
         yield MenuItem::subMenu('Images', 'fas fa-image')->setSubItems(
             [

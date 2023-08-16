@@ -5,19 +5,15 @@ namespace App\Controller\Admin;
 use App\Entity\City;
 use App\Entity\LevelsField;
 use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Faker\Provider\ar_EG\Text;
-use Symfony\Component\HttpFoundation\Request;
 
 class CityCrudController extends AbstractCrudController
 {
@@ -33,11 +29,6 @@ class CityCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
 
         yield TextField::new('name', 'Nom');
-
-        // yield ImageField::new('picture')
-        //     ->setBasePath('uploads/images')
-        //     ->setUploadDir('public/uploads/images')
-        //     ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
 
         yield ArrayField::new('images', 'Images')
             ->setTemplatePath('admin/field/images.html.twig')   
@@ -90,17 +81,6 @@ class CityCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setRequired(true);
 
-        // yield ChoiceField::new('sunshine_rate', 'Ensoleillement')
-        //     ->hideOnIndex()
-        //     ->setChoices(array_combine($levels, $levels))
-        //     ->allowMultipleChoices()
-        //     ->renderExpanded()
-        //     ->renderAsBadges([
-        //         '' => 'info',
-        //         'Low' => 'danger',
-        //         'Medium' => 'warning',
-        //         'High' => 'success',
-        //     ]);     
         yield TextField::new('sunshine_rate', 'Ensoleillement')
             ->hideOnIndex()
             ->setRequired(true);
@@ -113,17 +93,6 @@ class CityCrudController extends AbstractCrudController
         yield NumberField::new('cost', 'Coût de la vie')
             ->hideOnIndex();
 
-        // yield ChoiceField::new('housing', 'Logement')
-        //     ->hideOnIndex()
-        //     ->setChoices(array_combine($levels, $levels))
-        //     ->allowMultipleChoices()
-        //     ->renderExpanded()
-        //     ->renderAsBadges([
-        //         '' => 'info',
-        //         'Low' => 'danger',
-        //         'Medium' => 'warning',
-        //         'High' => 'success',
-        //     ]);     
         yield TextField::new('housing', 'Logement')
             ->hideOnIndex()
             ->setRequired(true);
@@ -131,21 +100,9 @@ class CityCrudController extends AbstractCrudController
         yield TextField::new('environment', 'Environnement')
             ->hideOnIndex();
 
-        // yield ChoiceField::new('internet', 'Internet')
-        //     ->hideOnIndex()
-        //     ->setChoices(array_combine($levels, $levels))
-        //     ->allowMultipleChoices()
-        //     ->renderExpanded()
-        //     ->renderAsBadges([
-        //         '' => 'info',
-        //         'Low' => 'danger',
-        //         'Medium' => 'warning',
-        //         'High' => 'success',
-        //     ]
         yield TextField::new('internet', 'Internet')
             ->hideOnIndex()
-            ->setRequired(true);
-        // );        
+            ->setRequired(true);    
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
