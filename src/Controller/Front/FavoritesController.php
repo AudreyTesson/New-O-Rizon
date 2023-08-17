@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FavoritesController extends AbstractController
 {
-    #[Route('/front/favorites', name: 'app_front_favorites')]
+    #[Route('/favorites', name: 'app_front_favorites')]
     public function index(): Response
     {
         /** @var \App\Entity\User */
@@ -21,12 +21,11 @@ class FavoritesController extends AbstractController
         $favoritesList = $user->getCity();
 
         return $this->render('front/favorites/index.html.twig', [
-            // "images" => $images,
             "city" => $favoritesList
         ]);
     }
 
-    #[Route('/front/favorites/add/{id}', name: 'app_front_favorites_add', requirements: ['id' => '\d+'])]
+    #[Route('/favorites/add/{id}', name: 'app_front_favorites_add', requirements: ['id' => '\d+'])]
     public function add($id, CityRepository $cityRepository, EntityManagerInterface $em, Request $request): Response
     {
         /** @var \App\Entity\User */
@@ -55,7 +54,7 @@ class FavoritesController extends AbstractController
         return $this->redirect($route);
     }
 
-    #[Route('/front/favorites/remove/{id}', name: 'app_front_favorites_remove', requirements: ['id' => '\d+'])]
+    #[Route('/favorites/remove/{id}', name: 'app_front_favorites_remove', requirements: ['id' => '\d+'])]
     public function remove($id, CityRepository $cityRepository, EntityManagerInterface $em, Request $request):Response
     {
         /** @var \App\Entity\User */
@@ -84,7 +83,7 @@ class FavoritesController extends AbstractController
         return $this->redirect($route);
     }
 
-    #[Route('/front/favorites/clear', name: 'app_front_favorites_clear')]
+    #[Route('/favorites/clear', name: 'app_front_favorites_clear')]
     public function removeAll(EntityManagerInterface $em): Response
     {
         /** @var \App\Entity\User */

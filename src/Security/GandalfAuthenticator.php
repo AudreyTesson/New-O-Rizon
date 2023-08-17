@@ -47,6 +47,8 @@ class GandalfAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_front_main'));
+        // return $this->redirect($route);
+        
     }
 
     protected function getLoginUrl(Request $request): string

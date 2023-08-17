@@ -23,6 +23,10 @@ class ReviewController extends AbstractController
         ReviewRepository $reviewRepository
     ): Response
     {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $reviewForForm = new Review();
         $city = $cityRepository->find($id);
     

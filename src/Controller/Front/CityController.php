@@ -17,13 +17,6 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CityController extends AbstractController
 {
-    private $client;
-    
-    public function __construct(HttpClientInterface $client)
-    {
-        $this->client = $client;
-    }
-
     #[Route('/cities', name: 'app_front_cities_list')]
     public function index(
         CityRepository $cityRepository,
@@ -32,10 +25,6 @@ class CityController extends AbstractController
         // CallApiService $callApiService
     ): Response
     {
-        // $response = $this->client->request(
-        //     'GET',
-        //     'https://api.unsplash.com/'
-        // );
         $cities = $paginator->paginate(
             $cityRepository->findCountryAndImageByCity(),
             $request->query->getInt('page', 1),

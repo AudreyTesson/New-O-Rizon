@@ -15,13 +15,12 @@
             </div>
         </div>
 
+{% if is_granted("IS_AUTHENTICATED_FULLY") %}
         <div class="flex justify-center bg-slate-100 w-screen md:w-1/2 my-12">
             <div class="flex justify-center bg-white shadow-md rounded px-8 pt-6 pb-8 my-10">
 
                 {{ form_start(formulaire)}}
-                    {# {{ form_row(formulaire.username) }} #}
                     {{ form_widget(formulaire.username) }}
-
                     {{form_row(formulaire.content)}}
                     {{form_row(formulaire.rating)}}
                     <button class="flex w-full justify-center rounded-md bg-cyan-900 px-3 py-1.5 text-base font-medium leading-6 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 mt-6">
@@ -31,6 +30,9 @@
 
             </div>
         </div>
+                {% else %}
+            <p>Vous devez être connecté pour ajouter un commentaire.</p>
+        {% endif %}
     </div> 
 </div>
 {% endblock %}

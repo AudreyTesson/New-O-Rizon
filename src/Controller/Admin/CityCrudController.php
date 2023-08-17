@@ -54,25 +54,6 @@ class CityCrudController extends AbstractCrudController
 
         yield DateTimeField::new('updated_at', 'Modifié le')->hideOnForm();
 
-        // $levels= [
-        //     'Non renseigné' => '',
-        //     'Bas' => 'Low',
-        //     'Moyen' => 'Medium',
-        //     'Haut' => 'High',
-        // ];
-
-        // yield ChoiceField::new('electricity', 'Electricité')
-        //     ->setRequired(false)
-        //     ->hideOnIndex()
-        //     ->setChoices(array_combine($levels, $levels))
-        //     ->allowMultipleChoices()
-        //     ->renderExpanded()
-        //     ->renderAsBadges([
-        //         '' => 'info',
-        //         'Low' => 'danger',
-        //         'Medium' => 'warning',
-        //         'High' => 'success',
-        //     ]);     
         yield TextField::new('electricity', 'Electricité')
             ->hideOnIndex()
             ->setRequired(true);
